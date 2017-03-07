@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="IPZ.jnlp">
+  <information>
+    <title>IPZ</title>
+    <vendor>Kamil</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="IPZ.jar" size="11139" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.41-bin.jar" size="992808" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="IPZ" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="ipz.IPZ"  name="IPZ" />
+  <update check="always"/>
+</jnlp>
