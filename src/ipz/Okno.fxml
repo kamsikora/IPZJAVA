@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.media.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
-      <TableView fx:id="tabela" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView layoutX="86.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="imie" prefWidth="200.0" text="Imię" />
-          <TableColumn fx:id="nazwisko" prefWidth="200.0" text="Nazwisko" />
-            <TableColumn fx:id="email" minWidth="0.0" prefWidth="200.0" text="Email" />
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
+      <Button layoutX="451.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
    </children>
 </AnchorPane>
