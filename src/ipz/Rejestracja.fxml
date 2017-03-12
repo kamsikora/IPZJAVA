@@ -6,8 +6,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Rejestracja">
    <children>
-      <Button layoutX="344.0" layoutY="333.0" mnemonicParsing="false" onAction="#ok" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="50.0" />
-      <Button layoutX="459.0" layoutY="333.0" mnemonicParsing="false" onAction="#anuluj" text="Anuluj" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <GridPane layoutX="25.0" layoutY="21.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,5 +34,11 @@
             <Label text="Powtórz hasło" GridPane.rowIndex="5" />
          </children>
       </GridPane>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#ok" prefWidth="70.0" text="OK" />
+            <Button mnemonicParsing="false" onAction="#anuluj" prefWidth="70.0" text="Anuluj" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
