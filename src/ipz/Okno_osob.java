@@ -14,7 +14,9 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -67,5 +69,10 @@ public class Okno_osob {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO      
     } 
+
+    @FXML
+    private void cofnij(ActionEvent event) throws Exception {
+        podstawa.Okno();
+    }
 
 }

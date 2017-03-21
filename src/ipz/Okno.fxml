@@ -16,5 +16,6 @@
       </TableView>
       <Button layoutX="470.0" layoutY="50.0" mnemonicParsing="false" text="Dodaj zadanie" />
       <Button layoutX="470.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
+      <Button fx:id="exit" layoutX="536.0" layoutY="361.0" mnemonicParsing="false" onAction="#wyjscie" text="Wyjście" />
    </children>
 </AnchorPane>

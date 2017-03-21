@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  *
@@ -18,6 +20,9 @@ public class Okno {
     
     private IPZ podstawa;
     
+    @FXML
+    private Button exit;
+    
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
     }
@@ -26,7 +31,16 @@ public class Okno {
         podstawa.Okno_osob();
     }
     
+    @FXML
+    private void wyjscie(ActionEvent event) throws Exception {
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
+    }
+    
     public void initialize(URL url, ResourceBundle rb) {
         // TODO      
     }   
+
+    
+
 }

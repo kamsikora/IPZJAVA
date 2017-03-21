@@ -4,15 +4,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
-      <TableView layoutX="86.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView prefHeight="210.0" prefWidth="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="75.0" text="Nazwa" />
+          <TableColumn prefWidth="122.0" text="Data rozpoczecia" />
+            <TableColumn prefWidth="122.0" text="Data zakończenia" />
+            <TableColumn prefWidth="122.0" text="Rzeczywista data zakończenia" />
         </columns>
       </TableView>
-      <Button layoutX="451.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
+      <Button layoutX="470.0" layoutY="50.0" mnemonicParsing="false" text="Dodaj zadanie" />
+      <Button layoutX="470.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
+      <Button fx:id="exit" layoutX="536.0" layoutY="361.0" mnemonicParsing="false" onAction="#wyjscie" text="Wyjście" />
    </children>
 </AnchorPane>

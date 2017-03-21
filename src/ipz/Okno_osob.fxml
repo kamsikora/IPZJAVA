@@ -7,12 +7,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
    <children>
-      <TableView fx:id="tabela" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columns>
-          <TableColumn fx:id="imie" prefWidth="200.0" text="Imię" />
-          <TableColumn fx:id="nazwisko" prefWidth="200.0" text="Nazwisko" />
-            <TableColumn fx:id="email" minWidth="0.0" prefWidth="200.0" text="Email" />
-        </columns>
-      </TableView>
+      <VBox prefHeight="372.0" prefWidth="602.0">
+         <children>
+            <TableView fx:id="tabela">
+              <columns>
+                <TableColumn fx:id="imie" prefWidth="200.0" text="Imię" />
+                <TableColumn fx:id="nazwisko" prefWidth="200.0" text="Nazwisko" />
+                  <TableColumn fx:id="email" minWidth="0.0" prefWidth="200.0" text="Email" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" />
    </children>
 </AnchorPane>
