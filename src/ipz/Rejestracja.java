@@ -21,6 +21,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -50,6 +52,8 @@ public class Rejestracja {
     private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352?characterEncoding=UTF-8";
     private final String user = "sql11162352";
     private final String password = "wUanP9eU6G";
+    @FXML
+    private AnchorPane anchor;
     
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
@@ -84,5 +88,6 @@ public class Rejestracja {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
+
     
 }
