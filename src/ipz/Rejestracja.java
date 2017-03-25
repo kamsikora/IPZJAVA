@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -46,6 +47,7 @@ public class Rejestracja {
     
     private Connection con = null;
     private Statement st = null;
+    private ResultSet rs = null;
 
     private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352?characterEncoding=UTF-8";
     private final String user = "sql11162352";
@@ -73,13 +75,27 @@ public class Rejestracja {
             if(email.getText().contains("@") && email.getText().contains("."))
             {
                 if(haslo.getText().equals(haslo2.getText())) {
-                    MessageDigest md5 = MessageDigest.getInstance("MD5");
-                    md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
-                    String str = String.format("%032x", new BigInteger(1, md5.digest()));
                     con = DriverManager.getConnection(url, user, password);
                     st = con.createStatement();
-                    st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
-                    dialog.close();
+                    rs = st.executeQuery("SELECT * FROM `uzytkownik` WHERE `login` = \""+login.getText()+"\"");
+                    if(rs.absolute(1)) { 
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.initOwner(dialog);
+                        alert.setTitle("Login zajęty");
+                        alert.setHeaderText("Login jest już zajęty");
+                        alert.setContentText("Proszę podać inny login");
+                        alert.showAndWait();
+                    }
+                    else
+                    {
+                        MessageDigest md5 = MessageDigest.getInstance("MD5");
+                        md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
+                        String str = String.format("%032x", new BigInteger(1, md5.digest()));
+                        con = DriverManager.getConnection(url, user, password);
+                        st = con.createStatement();
+                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
+                        dialog.close();
+                    }
                 }
                 else
                 {

@@ -20,27 +20,27 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="imie" style="-fx-border-color: black;" GridPane.columnIndex="1">
+            <TextField fx:id="imie" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1">
                <tooltip>
                   <Tooltip text="Podaj swoje Imię" />
                </tooltip></TextField>
-            <TextField fx:id="nazwisko" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="nazwisko" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Podaj swoje Nazwisko" />
                </tooltip></TextField>
-            <TextField fx:id="login" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="login" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <tooltip>
                   <Tooltip text="Login którym będziesz się poslugiwać" />
                </tooltip></TextField>
-            <TextField fx:id="email" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="email" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="E-mail kontaktowy" />
                </tooltip></TextField>
-            <PasswordField fx:id="haslo" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <PasswordField fx:id="haslo" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="Twoje hasło (minimum 6 znaków)" />
                </tooltip></PasswordField>
-            <PasswordField fx:id="haslo2" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <PasswordField fx:id="haslo2" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <tooltip>
                   <Tooltip text="Powtórz swoje hasło" />
                </tooltip></PasswordField>

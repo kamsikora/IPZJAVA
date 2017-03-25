@@ -70,7 +70,6 @@ public class FXMLDocumentController implements Initializable {
                 alert.showAndWait();
             }
         }
-        rs.close();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

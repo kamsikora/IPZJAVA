@@ -48,7 +48,6 @@ public class Okno_osob {
         while(rs.next()) { 
             personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"))); 
         }
-        rs.close();  
     }
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
