@@ -7,8 +7,6 @@ package ipz;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -51,7 +49,7 @@ public class IPZ extends Application {
         dialogStage.setScene(scene);
         Rejestracja controller = loader.getController();
         controller.setDialog(dialogStage);
-        
+        dialogStage.setResizable(false);
         dialogStage.showAndWait();
     }
        

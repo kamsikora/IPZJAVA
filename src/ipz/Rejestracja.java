@@ -21,8 +21,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -52,42 +50,62 @@ public class Rejestracja {
     private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352?characterEncoding=UTF-8";
     private final String user = "sql11162352";
     private final String password = "wUanP9eU6G";
-    @FXML
-    private AnchorPane anchor;
     
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
     }
-    
     public void initialize(URL url, ResourceBundle rb) {
         // TODO  
     }   
     @FXML
     private void ok(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException {
-        if(haslo.getText().equals(haslo2.getText())) {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
-            String str = String.format("%032x", new BigInteger(1, md5.digest()));
-            con = DriverManager.getConnection(url, user, password);
-            st = con.createStatement();
-            st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
-            dialog.close();
-        }
-        else
+        if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals(""))
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
-            alert.setTitle("Błąd hasła");
-            alert.setHeaderText("Hasła nie zgadzają się");
-            alert.setContentText("Proszę podać ponownie hasła");
+            alert.setTitle("Puste pola");
+            alert.setHeaderText("Nie wszystkie pola są wypełnione");
+            alert.setContentText("Proszę wypełnić wszystkie pola");
             alert.showAndWait();
-        } 
+        }
+        else
+        {
+            if(email.getText().contains("@") && email.getText().contains("."))
+            {
+                if(haslo.getText().equals(haslo2.getText())) {
+                    MessageDigest md5 = MessageDigest.getInstance("MD5");
+                    md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
+                    String str = String.format("%032x", new BigInteger(1, md5.digest()));
+                    con = DriverManager.getConnection(url, user, password);
+                    st = con.createStatement();
+                    st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
+                    dialog.close();
+                }
+                else
+                {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(dialog);
+                    alert.setTitle("Błąd hasła");
+                    alert.setHeaderText("Hasła nie zgadzają się");
+                    alert.setContentText("Proszę podać ponownie hasła");
+                    alert.showAndWait();
+                }
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialog);
+                alert.setTitle("Błąd w adresie email");
+                alert.setHeaderText("Adres email nie zgadzają się");
+                alert.setContentText("Proszę podać ponownie adres email");
+                alert.showAndWait();
+            }
+                
+        }
     }
 
     @FXML
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
-
-    
 }
