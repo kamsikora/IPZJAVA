@@ -5,6 +5,7 @@
  */
 package ipz;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -44,20 +45,21 @@ public class FXMLDocumentController implements Initializable {
     private final String password = "wUanP9eU6G";
     
     private IPZ podstawa;
-    public void Setglowny(IPZ podstawa) {
+    public void Setglowny(IPZ podstawa) throws IOException {
         this.podstawa=podstawa;
     }
     @FXML
     private void logowanie(ActionEvent event) throws SQLException, Exception {
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT `haslo` FROM `uzytkownik` WHERE `login` LIKE \""+login.getText()+"\"");
+        rs = st.executeQuery("SELECT `haslo` FROM `uzytkownik` WHERE `login` = \""+login.getText()+"\"");
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
         String str = String.format("%032x", new BigInteger(1, md5.digest()));
         while(rs.next()) { 
             if(str.equals(rs.getString(1)))
             {
+                podstawa.setlogin(login.getText());
                 podstawa.Okno();
             } 
             else
@@ -73,6 +75,5 @@ public class FXMLDocumentController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO    
     }    
 }

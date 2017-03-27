@@ -19,10 +19,17 @@ import javafx.stage.Stage;
 public class IPZ extends Application {
     
     private Stage stage;
-    
     public Stage getstage() {
         return stage;
     } 
+    
+    private String login;
+    public String getlogin() {
+        return login;
+    }
+    public void setlogin(String login) {
+        this.login=login;
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
