@@ -5,6 +5,7 @@
  */
 package ipz;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +15,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,7 +48,6 @@ public class Okno_osob {
         while(rs.next()) { 
             personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"))); 
         }
-        rs.close();  
     }
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
@@ -67,5 +68,15 @@ public class Okno_osob {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO      
     } 
+
+    @FXML
+    private void cofnij(ActionEvent event) throws Exception {
+        podstawa.Okno();
+    }
+
+    @FXML
+    private void dodaj(ActionEvent event) throws IOException {
+        podstawa.showDialog();
+    }
 
 }

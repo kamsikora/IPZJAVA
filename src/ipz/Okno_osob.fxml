@@ -7,12 +7,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
    <children>
-      <TableView fx:id="tabela" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="tabela">
         <columns>
-          <TableColumn fx:id="imie" prefWidth="200.0" text="Imię" />
-          <TableColumn fx:id="nazwisko" prefWidth="200.0" text="Nazwisko" />
-            <TableColumn fx:id="email" minWidth="0.0" prefWidth="200.0" text="Email" />
+          <TableColumn fx:id="imie" prefWidth="150.0" text="Imię" />
+          <TableColumn fx:id="nazwisko" prefWidth="150.0" text="Nazwisko" />
+            <TableColumn fx:id="email" minWidth="0.0" prefWidth="150.0" text="Email" />
         </columns>
       </TableView>
+      <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" />
+      <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" onAction="#dodaj" text="Dodaj użytkownika" />
    </children>
 </AnchorPane>

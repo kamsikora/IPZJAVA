@@ -4,10 +4,8 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Rejestracja">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Rejestracja">
    <children>
-      <Button layoutX="344.0" layoutY="333.0" mnemonicParsing="false" onAction="#ok" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="50.0" />
-      <Button layoutX="459.0" layoutY="333.0" mnemonicParsing="false" onAction="#anuluj" text="Anuluj" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <GridPane layoutX="25.0" layoutY="21.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -22,19 +20,43 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="imie" GridPane.columnIndex="1" />
-            <TextField fx:id="nazwisko" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="login" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <PasswordField fx:id="haslo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <PasswordField fx:id="haslo2" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="imie" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Podaj swoje Imię" />
+               </tooltip></TextField>
+            <TextField fx:id="nazwisko" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Podaj swoje Nazwisko" />
+               </tooltip></TextField>
+            <TextField fx:id="login" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Login którym będziesz się poslugiwać" />
+               </tooltip></TextField>
+            <TextField fx:id="email" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <tooltip>
+                  <Tooltip text="E-mail kontaktowy" />
+               </tooltip></TextField>
+            <PasswordField fx:id="haslo" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <tooltip>
+                  <Tooltip text="Twoje hasło (minimum 6 znaków)" />
+               </tooltip></PasswordField>
+            <PasswordField fx:id="haslo2" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <tooltip>
+                  <Tooltip text="Powtórz swoje hasło" />
+               </tooltip></PasswordField>
             <Label text="Imię" />
             <Label text="Nazwisko" GridPane.rowIndex="1" />
             <Label text="Login" GridPane.rowIndex="2" />
             <Label text="E-mail" GridPane.rowIndex="3" />
             <Label text="Hasło" GridPane.rowIndex="4" />
-            <Label text="Powtórz hasło" GridPane.rowIndex="5" />
+            <Label text="Weryfikacja hasłą" GridPane.rowIndex="5" />
          </children>
       </GridPane>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#ok" prefWidth="70.0" text="OK" />
+            <Button mnemonicParsing="false" onAction="#anuluj" prefWidth="70.0" text="Anuluj" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

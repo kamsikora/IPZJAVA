@@ -4,15 +4,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
-      <TableView layoutX="86.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <Button layoutX="451.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
+      <Button layoutX="470.0" layoutY="50.0" mnemonicParsing="false" text="Dodaj projekt" />
+      <Button layoutX="470.0" layoutY="89.0" mnemonicParsing="false" onAction="#pokaz" text="Pokaż użytkowników" />
+      <Button fx:id="exit" layoutX="536.0" layoutY="361.0" mnemonicParsing="false" onAction="#wyjscie" text="Wyjście" />
    </children>
 </AnchorPane>

@@ -5,7 +5,6 @@
  */
 package ipz;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -48,11 +47,6 @@ public class FXMLDocumentController implements Initializable {
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
     }
-
-    @FXML
-    private void rejestracja(ActionEvent event) throws IOException {
-        podstawa.showDialog();
-    } 
     @FXML
     private void logowanie(ActionEvent event) throws SQLException, Exception {
         con = DriverManager.getConnection(url, user, password);
@@ -76,7 +70,6 @@ public class FXMLDocumentController implements Initializable {
                 alert.showAndWait();
             }
         }
-        rs.close();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
