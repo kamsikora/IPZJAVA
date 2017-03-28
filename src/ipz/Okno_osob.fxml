@@ -7,14 +7,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
    <children>
-      <TableView fx:id="tabela">
+      <TableView fx:id="tabela" prefHeight="400.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="imie" prefWidth="150.0" text="Imię" />
-          <TableColumn fx:id="nazwisko" prefWidth="150.0" text="Nazwisko" />
-            <TableColumn fx:id="email" minWidth="0.0" prefWidth="150.0" text="Email" />
+          <TableColumn fx:id="imie" prefWidth="110.0" text="Imię" />
+          <TableColumn fx:id="nazwisko" prefWidth="117.0" text="Nazwisko" />
+            <TableColumn fx:id="email" minWidth="0.0" prefWidth="153.0" text="Email" />
+            <TableColumn fx:id="ranga" prefWidth="69.0" text="Ranga" />
         </columns>
       </TableView>
-      <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" />
-      <Button layoutX="462.0" layoutY="38.0" mnemonicParsing="false" onAction="#dodaj" text="Dodaj użytkownika" />
+      <VBox AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#dodaj" text="Dodaj użytkownika" />
+         </children>
+      </VBox>
+      <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
    </children>
 </AnchorPane>

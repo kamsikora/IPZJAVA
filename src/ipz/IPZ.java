@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 public class IPZ extends Application {
     
     private Stage stage;
+
     public Stage getstage() {
         return stage;
     } 
@@ -44,7 +45,32 @@ public class IPZ extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    public void showDialog() throws IOException {
+    
+    public void Okno() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Okno controller = loader.getController();
+        controller.Setglowny(this);
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void Okno_osob() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_osob.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Okno_osob controller = loader.getController();
+        controller.Setglowny(this);
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void showDialog() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Rejestracja.fxml"));
         loader.load();
         Parent root = loader.getRoot();
@@ -58,29 +84,6 @@ public class IPZ extends Application {
         controller.setDialog(dialogStage);
         dialogStage.setResizable(false);
         dialogStage.showAndWait();
-    }
-       
-    public void Okno() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno.fxml"));
-        loader.load();
-        Parent root = loader.getRoot();
-        Okno controller = loader.getController();
-        controller.Setglowny(this);
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void Okno_osob() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_osob.fxml"));
-        loader.load();
-        Parent root = loader.getRoot();
-        Okno_osob controller = loader.getController();
-        controller.Setglowny(this);
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
     /**
      * @param args the command line arguments

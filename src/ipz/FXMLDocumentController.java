@@ -5,7 +5,6 @@
  */
 package ipz;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -45,7 +44,7 @@ public class FXMLDocumentController implements Initializable {
     private final String password = "wUanP9eU6G";
     
     private IPZ podstawa;
-    public void Setglowny(IPZ podstawa) throws IOException {
+    public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
     }
     @FXML

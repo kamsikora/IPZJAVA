@@ -20,7 +20,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  *
@@ -54,7 +53,7 @@ public class Okno {
     private final String password = "wUanP9eU6G";
     
     @FXML
-    private void pokaz(ActionEvent event) throws Exception {
+    private void pokaz(ActionEvent event) throws Exception  {
         podstawa.Okno_osob();
     }
     @FXML
@@ -69,8 +68,9 @@ public class Okno {
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
-            Stage stage = (Stage) exit.getScene().getWindow();
-            stage.close();
+//            Stage stage = (Stage) exit.getScene().getWindow();
+//            stage.close();
+              podstawa.getstage().close();
         } 
         else 
         {

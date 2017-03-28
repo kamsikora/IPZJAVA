@@ -28,7 +28,7 @@ public class Okno_osob {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
     private IPZ podstawa;
-    
+
     public ObservableList<Osoba> getPersonData() {
         return personData;
     }
@@ -44,9 +44,9 @@ public class Okno_osob {
     public Okno_osob() throws SQLException {
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT `imie`, `nazwisko`, `email` FROM `uzytkownik`");
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"))); 
+            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"))); 
         }
     }
     public void Setglowny(IPZ podstawa) {
@@ -55,6 +55,7 @@ public class Okno_osob {
         imie.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         nazwisko.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        ranga.setCellValueFactory(cellData -> cellData.getValue().rangaProperty());
     }
     @FXML
     private TableView<Osoba> tabela;
@@ -64,6 +65,8 @@ public class Okno_osob {
     private TableColumn<Osoba, String> nazwisko;
     @FXML
     private TableColumn<Osoba, String> email;
+    @FXML
+    private TableColumn<Osoba, String> ranga;
     
     public void initialize(URL url, ResourceBundle rb) {
         // TODO      
@@ -75,8 +78,9 @@ public class Okno_osob {
     }
 
     @FXML
-    private void dodaj(ActionEvent event) throws IOException {
+    private void dodaj(ActionEvent event) throws Exception {
         podstawa.showDialog();
+        podstawa.Okno_osob();
     }
 
 }
