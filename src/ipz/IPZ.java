@@ -5,7 +5,6 @@
  */
 package ipz;
 
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,7 +52,8 @@ public class IPZ extends Application {
         Okno controller = loader.getController();
         controller.Setglowny(this);
         
-        Scene scene = new Scene(root);
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -65,12 +65,13 @@ public class IPZ extends Application {
         Okno_osob controller = loader.getController();
         controller.Setglowny(this);
         
-        Scene scene = new Scene(root);
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(scene);
         stage.show();
     }
     
-    public void showDialog() throws Exception {
+    public void showDialogRejestracja() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Rejestracja.fxml"));
         loader.load();
         Parent root = loader.getRoot();
@@ -81,6 +82,21 @@ public class IPZ extends Application {
         Scene scene = new Scene(root);
         dialogStage.setScene(scene);
         Rejestracja controller = loader.getController();
+        controller.setDialog(dialogStage);
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+    public void showDialogProjekt() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_Projekt.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Nowy Projekt");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(stage);
+        Scene scene = new Scene(root);
+        dialogStage.setScene(scene);
+        Okno_Projekt controller = loader.getController();
         controller.setDialog(dialogStage);
         dialogStage.setResizable(false);
         dialogStage.showAndWait();

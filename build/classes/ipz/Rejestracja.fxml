@@ -52,7 +52,7 @@
             <Label text="Weryfikacja hasłą" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Button mnemonicParsing="false" onAction="#ok" prefWidth="70.0" text="OK" />
             <Button mnemonicParsing="false" onAction="#anuluj" prefWidth="70.0" text="Anuluj" />

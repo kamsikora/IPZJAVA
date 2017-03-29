@@ -5,14 +5,11 @@
  */
 package ipz;
 
-import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,10 +49,6 @@ public class Okno_osob {
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
         tabela.setItems(getPersonData());
-        imie.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        nazwisko.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        ranga.setCellValueFactory(cellData -> cellData.getValue().rangaProperty());
     }
     @FXML
     private TableView<Osoba> tabela;
@@ -68,10 +61,6 @@ public class Okno_osob {
     @FXML
     private TableColumn<Osoba, String> ranga;
     
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO      
-    } 
-
     @FXML
     private void cofnij(ActionEvent event) throws Exception {
         podstawa.Okno();
@@ -79,8 +68,13 @@ public class Okno_osob {
 
     @FXML
     private void dodaj(ActionEvent event) throws Exception {
-        podstawa.showDialog();
+        podstawa.showDialogRejestracja();
         podstawa.Okno_osob();
     }
-
+    public void initialize() {
+        imie.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        nazwisko.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        ranga.setCellValueFactory(cellData -> cellData.getValue().rangaProperty());
+    } 
 }

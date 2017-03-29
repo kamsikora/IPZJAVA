@@ -7,7 +7,6 @@ package ipz;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +15,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -32,15 +30,10 @@ public class Rejestracja {
 
     @FXML
     private TextField imie;
-    @FXML
     private TextField nazwisko;
-    @FXML
     private TextField login;
-    @FXML
     private TextField email;
-    @FXML
     private PasswordField haslo;
-    @FXML
     private PasswordField haslo2;
     
     private Stage dialog;
@@ -56,9 +49,7 @@ public class Rejestracja {
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
     }
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO  
-    }   
+    
     @FXML
     private void ok(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException {
         if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals(""))
@@ -124,4 +115,6 @@ public class Rejestracja {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
+    public void initialize() {
+    } 
 }
