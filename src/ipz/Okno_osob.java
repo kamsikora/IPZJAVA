@@ -24,12 +24,12 @@ import javafx.scene.control.TableView;
 public class Okno_osob {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
-    private IPZ podstawa;
-
     public ObservableList<Osoba> getPersonData() {
         return personData;
     }
     
+    private IPZ podstawa;
+
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;

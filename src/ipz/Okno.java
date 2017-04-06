@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,6 +26,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 /**
@@ -33,17 +37,30 @@ import javafx.util.Callback;
 public class Okno {
     
     private final ObservableList<Projekt> projektData = FXCollections.observableArrayList();
-    public ObservableList<Projekt> getprojektData() {
+    public ObservableList<Projekt> getProjektData() {
         return projektData;
     }
-    
-    private IPZ podstawa;
-    
+    private final ObservableList<Sprint> sprintData = FXCollections.observableArrayList();
+    public ObservableList<Sprint> getSprintData() {
+        return sprintData;
+    }
+    @FXML
+    private Label projekt;
+    @FXML
+    private TableView<Sprint> tabela;
+    @FXML
+    private TableColumn<Sprint, String> sprint;
+    @FXML
+    private TableColumn<Sprint, String> dataroz;
+    @FXML
+    private TableColumn<Sprint, String> datazak;
     @FXML
     private Label info;
     @FXML
     private ComboBox<Projekt> lista;
     
+    private IPZ podstawa;
+
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;
@@ -63,7 +80,7 @@ public class Okno {
     
     public void Setglowny(IPZ podstawa) throws SQLException {
         this.podstawa=podstawa;
-        lista.setItems(getprojektData());
+        lista.setItems(getProjektData());
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` WHERE  `login` = \""+podstawa.getlogin()+"\"");
@@ -104,7 +121,6 @@ public class Okno {
     }
     
     public void initialize() {
-
         lista.getSelectionModel().selectFirst();
         lista.setCellFactory(new Callback<ListView<Projekt>, ListCell<Projekt>>() {
         @Override
@@ -142,8 +158,22 @@ public class Okno {
         });
         lista.valueProperty().addListener(new ChangeListener<Projekt>() {
         @Override
-        public void changed(ObservableValue ov, Projekt oldValue, Projekt newValue) {
-            System.out.println("sad");
+        public void changed(ObservableValue ov, Projekt oldValue, Projekt newValue)  {
+            sprintData.removeAll(sprintData);
+            tabela.setItems(getSprintData());
+            sprint.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
+            dataroz.setCellValueFactory(cellData -> cellData.getValue().Data_rozpoczeciaProperty());
+            datazak.setCellValueFactory(cellData -> cellData.getValue().Data_zakonczeniaProperty());
+            try {
+                projekt.setText("Nazwa projektu: "+newValue.getnazwa()+"\nData rozpoczęcia: "+newValue.getdata_rozpoczecia()+" Data zakończenia: "+newValue.getdata_zakonczenia());
+                con = DriverManager.getConnection(url, user, password);
+                rs = st.executeQuery("SELECT * FROM  `sprint_to_projekt` INNER JOIN  `sprint` ON  `sprint_to_projekt`.`id_sprint` =  `sprint`.`id` INNER JOIN  `projekt` ON  `sprint_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getnazwa()+"\"");
+                while(rs.next()) { 
+                    sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Okno.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         });
     }  

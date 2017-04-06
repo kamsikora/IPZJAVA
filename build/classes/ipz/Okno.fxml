@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
       <Button mnemonicParsing="false" onAction="#wyjscie" text="Wyjście" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-      <Label fx:id="info" text="Label" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="info" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
       <VBox AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0">
          <children>
             <Button mnemonicParsing="false" onAction="#dodaj" text="Dodaj projekt" />
@@ -16,5 +16,13 @@
          </children>
       </VBox>
       <ComboBox fx:id="lista" prefWidth="150.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="projekt" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+      <TableView fx:id="tabela" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="70.0">
+        <columns>
+          <TableColumn fx:id="sprint" prefWidth="75.0" text="Sprinty" />
+            <TableColumn fx:id="dataroz" prefWidth="121.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="datazak" prefWidth="121.0" text="Data zakończenia" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
