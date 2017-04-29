@@ -39,9 +39,9 @@ public class FXMLDocumentController implements Initializable {
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
     
     private IPZ podstawa;
     public void Setglowny(IPZ podstawa) {
@@ -55,21 +55,35 @@ public class FXMLDocumentController implements Initializable {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
         String str = String.format("%032x", new BigInteger(1, md5.digest()));
-        while(rs.next()) { 
+        if(!rs.next()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(podstawa.getstage());
+            alert.setTitle("Błąd logowania");
+            alert.setHeaderText("Zły login");
+            alert.setContentText("Proszę podać ponownie login");
+            alert.showAndWait();
+        } else {
             if(str.equals(rs.getString(1)))
             {
                 podstawa.setlogin(login.getText());
-                podstawa.Okno();
+                podstawa.Projekty_uzytkownicy();
+            }
+        do {
+            if(str.equals(rs.getString(1)))
+            {
+                podstawa.setlogin(login.getText());
+                podstawa.Projekty_uzytkownicy();
             } 
             else
             {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.initOwner(podstawa.getstage());
                 alert.setTitle("Błąd logowania");
-                alert.setHeaderText("Złe hasło lub login");
+                alert.setHeaderText("Złe hasło");
                 alert.setContentText("Proszę podać ponownie hasło");
                 alert.showAndWait();
-            }
+            }    
+            } while (rs.next());
         }
     }
     @Override

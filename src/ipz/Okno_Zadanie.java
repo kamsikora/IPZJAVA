@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author Kamil
  */
-public class Okno_Projekt {
+public class Okno_Zadanie {
 
     @FXML
     private TextField nazwa;
@@ -29,7 +29,7 @@ public class Okno_Projekt {
     private DatePicker start;
     @FXML
     private DatePicker koniec;
-    
+
     private Stage dialog;
     
     private Connection con = null;
@@ -39,10 +39,19 @@ public class Okno_Projekt {
     private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
-    
+
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
     }
+    
+    private IPZ controller;
+
+    public void setController(IPZ controller ) {
+        this.controller = controller;
+    }
+    
+    public void initialize() {
+    }    
 
     @FXML
     private void ok(ActionEvent event) throws SQLException {
@@ -59,7 +68,9 @@ public class Okno_Projekt {
         {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
-            st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
+            st.executeUpdate("INSERT INTO `zadanie`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
+            st.executeUpdate("SET @id_zadanie = LAST_INSERT_ID()");
+            st.executeUpdate("INSERT INTO `zadanie_to_projekt` (`id_projekt`, `id_zadanie`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getnazwaProjekt()+"\"),@id_zadanie)");
             dialog.close();
         }
     }
@@ -68,6 +79,5 @@ public class Okno_Projekt {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
-    public void initialize() {
-    } 
+    
 }

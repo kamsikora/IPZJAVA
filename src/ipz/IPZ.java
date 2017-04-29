@@ -30,6 +30,14 @@ public class IPZ extends Application {
     public void setlogin(String login) {
         this.login=login;
     }
+
+    private String nazwaProjekt;
+    public String getnazwaProjekt() {
+        return nazwaProjekt;
+    } 
+    public void setnazwaProjekt(String nazwaProjekt) {
+        this.nazwaProjekt=nazwaProjekt; 
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -71,6 +79,19 @@ public class IPZ extends Application {
         stage.show();
     }
     
+    public void Projekty_uzytkownicy() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("projekty_uzytkownicy.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Projekty_uzytkownicy controller = loader.getController();
+        controller.Setglowny(this);
+        
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     public void showDialogRejestracja() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Rejestracja.fxml"));
         loader.load();
@@ -98,6 +119,38 @@ public class IPZ extends Application {
         dialogStage.setScene(scene);
         Okno_Projekt controller = loader.getController();
         controller.setDialog(dialogStage);
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+    public void showDialogSprint() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_Sprintu.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Nowy Sprint");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(stage);
+        Scene scene = new Scene(root);
+        dialogStage.setScene(scene);
+        Okno_Sprintu controller = loader.getController();
+        controller.setDialog(dialogStage);
+        controller.setController(this);
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+    public void showDialogZadanie() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_Zadanie.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Nowe Zadanie");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(stage);
+        Scene scene = new Scene(root);
+        dialogStage.setScene(scene);
+        Okno_Zadanie controller = loader.getController();
+        controller.setDialog(dialogStage);
+        controller.setController(this);
         dialogStage.setResizable(false);
         dialogStage.showAndWait();
     }

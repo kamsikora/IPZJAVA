@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
@@ -19,9 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -58,16 +55,20 @@ public class Okno {
     private Label info;
     @FXML
     private ComboBox<Projekt> lista;
-    
+    @FXML
+    private Button sprinton;
+    @FXML
+    private Button zadanieon;
+   
     private IPZ podstawa;
-
+           
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
     
     public Okno() throws SQLException {
         con = DriverManager.getConnection(url, user, password);
@@ -91,35 +92,7 @@ public class Okno {
     
     @FXML
     private void pokaz(ActionEvent event) throws Exception  {
-        podstawa.Okno_osob();
     }
-    @FXML
-    private void wyjscie(ActionEvent event) throws Exception {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Zamykanie aplikacji");
-        alert.setHeaderText("Czy chcesz wyłączyć program?");
-
-        ButtonType buttonTypeOne = new ButtonType("Tak");
-        ButtonType buttonTypeCancel = new ButtonType("Nie");
-
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne){
-//            Stage stage = (Stage) exit.getScene().getWindow();
-//            stage.close();
-              podstawa.getstage().close();
-        } 
-        else 
-        {
-            alert.close();
-        }
-    }
-    @FXML
-    private void dodaj(ActionEvent event) throws Exception {
-        podstawa.showDialogProjekt();
-        podstawa.Okno();
-    }
-    
     public void initialize() {
         lista.getSelectionModel().selectFirst();
         lista.setCellFactory(new Callback<ListView<Projekt>, ListCell<Projekt>>() {
@@ -164,6 +137,7 @@ public class Okno {
             sprint.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
             dataroz.setCellValueFactory(cellData -> cellData.getValue().Data_rozpoczeciaProperty());
             datazak.setCellValueFactory(cellData -> cellData.getValue().Data_zakonczeniaProperty());
+            podstawa.setnazwaProjekt(newValue.getnazwa());
             try {
                 projekt.setText("Nazwa projektu: "+newValue.getnazwa()+"\nData rozpoczęcia: "+newValue.getdata_rozpoczecia()+" Data zakończenia: "+newValue.getdata_zakonczenia());
                 con = DriverManager.getConnection(url, user, password);
@@ -174,7 +148,29 @@ public class Okno {
             } catch (SQLException ex) {
                 Logger.getLogger(Okno.class.getName()).log(Level.SEVERE, null, ex);
             }
+            sprinton.setDisable(false);
+            zadanieon.setDisable(false);
         }
         });
     }  
+
+    @FXML
+    private void cofnij(ActionEvent event) throws Exception {
+        podstawa.Projekty_uzytkownicy();
+    }
+
+    @FXML
+    private void dodaj_P(ActionEvent event) throws Exception {
+        podstawa.showDialogProjekt();
+    }
+
+    @FXML
+    private void dodaj_S(ActionEvent event) throws Exception {
+        podstawa.showDialogSprint();
+    }
+
+    @FXML
+    private void dodaj_Z(ActionEvent event) throws Exception {
+        podstawa.showDialogZadanie();
+    }
 }

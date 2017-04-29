@@ -34,9 +34,9 @@ public class Okno_osob {
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
     
     public Okno_osob() throws SQLException {
         con = DriverManager.getConnection(url, user, password);
@@ -63,13 +63,12 @@ public class Okno_osob {
     
     @FXML
     private void cofnij(ActionEvent event) throws Exception {
-        podstawa.Okno();
+        podstawa.Projekty_uzytkownicy();
     }
 
     @FXML
     private void dodaj(ActionEvent event) throws Exception {
         podstawa.showDialogRejestracja();
-        podstawa.Okno_osob();
     }
     public void initialize() {
         imie.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());

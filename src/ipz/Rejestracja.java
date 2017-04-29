@@ -15,12 +15,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  *
@@ -30,29 +36,44 @@ public class Rejestracja {
 
     @FXML
     private TextField imie;
+    @FXML
     private TextField nazwisko;
+    @FXML
     private TextField login;
+    @FXML
     private TextField email;
+    @FXML
     private PasswordField haslo;
+    @FXML
     private PasswordField haslo2;
     
     private Stage dialog;
+    
+    private String rolaUzytkownika;
     
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352?characterEncoding=UTF-8";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
+    @FXML
+    private ComboBox<String> rola;
     
-    public void setDialog(Stage dialog) {
+    public void setDialog(Stage dialog) throws SQLException {
         this.dialog = dialog;
+        con = DriverManager.getConnection(url, user, password);
+        st = con.createStatement();
+        rs = st.executeQuery("SELECT * FROM  `rola`");
+        while(rs.next()) { 
+           rola.getItems().addAll(rs.getString("nazwa"));
+        }
     }
     
     @FXML
     private void ok(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException {
-        if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals(""))
+        if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals("") || rola.getValue() == null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
@@ -84,7 +105,7 @@ public class Rejestracja {
                         String str = String.format("%032x", new BigInteger(1, md5.digest()));
                         con = DriverManager.getConnection(url, user, password);
                         st = con.createStatement();
-                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
+                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`, `id_rola`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\",(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\"))");
                         dialog.close();
                     }
                 }
@@ -115,6 +136,47 @@ public class Rejestracja {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
-    public void initialize() {
+    public void initialize() { 
+        rola.getSelectionModel().selectFirst();
+        rola.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+        @Override
+        public ListCell<String> call(ListView<String> param) {
+  
+            return new ListCell<String>(){
+              @Override
+                public void updateItem(String item, boolean empty){
+                    super.updateItem(item, empty);
+                    if(!empty) {
+                        setText(item);
+                        setGraphic(null);
+                    } 
+                    else 
+                    {
+                        setText(null);
+                    }
+                }
+           };
+        }
+        });
+        rola.setButtonCell(
+        new ListCell<String>() {
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty); 
+            if(!empty) {
+                setText(item);
+            } 
+            else 
+            {
+                setText(null);
+            }
+        }
+        });
+        rola.valueProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue ov, String oldValue, String newValue)  {
+            rolaUzytkownika=newValue;
+        }
+        });
     } 
 }

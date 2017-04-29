@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Projekty_uzytkownicy">
+   <left>
+      <Button mnemonicParsing="false" onAction="#projekty" prefHeight="100.0" prefWidth="299.0" text="Projekty" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Button mnemonicParsing="false" onAction="#uzytkownicy" prefHeight="100.0" prefWidth="299.0" text="Użytkownicy" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#wyjscie" text="Wyjście" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="info" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>
