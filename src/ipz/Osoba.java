@@ -13,23 +13,27 @@ import javafx.beans.property.StringProperty;
  * @author Kamil
  */
 public class Osoba {
-    private final StringProperty firstName;
-    private final StringProperty lastName;
+    private final StringProperty imie;
+    private final StringProperty nazwisko;
     private final StringProperty email;
     private final StringProperty ranga;
+    private final StringProperty login;
+    private final StringProperty haslo;
     
-    public Osoba(String fName, String lName, String email, String ranga) {
-        this.firstName = new SimpleStringProperty(fName);
-        this.lastName = new SimpleStringProperty(lName);
+    public Osoba(String imie, String nazwisko, String email, String ranga, String login, String haslo) {
+        this.imie = new SimpleStringProperty(imie);
+        this.nazwisko = new SimpleStringProperty(nazwisko);
         this.email = new SimpleStringProperty(email);
         this.ranga = new SimpleStringProperty(ranga);
+        this.login = new SimpleStringProperty(login);
+        this.haslo = new SimpleStringProperty(haslo);
     }
  
-    public StringProperty firstNameProperty() {
-        return firstName;
+    public StringProperty imieProperty() {
+        return imie;
     }
-    public StringProperty lastNameProperty() {
-        return lastName;
+    public StringProperty nazwiskoProperty() {
+        return nazwisko;
     }
     public StringProperty emailProperty() {
         return email;
@@ -37,27 +41,30 @@ public class Osoba {
     public StringProperty rangaProperty() {
         return ranga;
     }
-    
-//    public String getFirstName() {
-//        return firstName.get();
-//    }    
-//    
-//    public void setFirstName(String fName) {
-//        firstName.set(fName);
-//    }
-// 
-//    public String getLastName() {
-//        return lastName.get();
-//    }
-// 
+    public String getLogin() {
+        return login.get();
+    }
+    public String getImie() {
+        return imie.get();
+    }    
+    public String getNazwisko() {
+        return nazwisko.get();
+    }
+    public String getEmail() {
+        return email.get();
+    }
+    public String getRanga() {
+        return ranga.get();
+    }
+     public String getHaslo() {
+        return haslo.get();
+    }
 //    public void setLastName(String fName) {
-//        lastName.set(fName);
+//        nazwisko.set(fName);
 //    }
-// 
-//    public String getEmail() {
-//        return email.get();
+//    public void setFirstName(String fName) {
+//        imie.set(fName);
 //    }
-// 
 //    public void setEmail(String fName) {
 //        email.set(fName);
 //    }    

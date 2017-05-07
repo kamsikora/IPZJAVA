@@ -62,27 +62,22 @@ public class FXMLDocumentController implements Initializable {
             alert.setHeaderText("Zły login");
             alert.setContentText("Proszę podać ponownie login");
             alert.showAndWait();
-        } else {
-            if(str.equals(rs.getString(1)))
-            {
-                podstawa.setlogin(login.getText());
-                podstawa.Projekty_uzytkownicy();
-            }
-        do {
-            if(str.equals(rs.getString(1)))
-            {
-                podstawa.setlogin(login.getText());
-                podstawa.Projekty_uzytkownicy();
-            } 
-            else
-            {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.initOwner(podstawa.getstage());
-                alert.setTitle("Błąd logowania");
-                alert.setHeaderText("Złe hasło");
-                alert.setContentText("Proszę podać ponownie hasło");
-                alert.showAndWait();
-            }    
+        } else { 
+            do {
+                if(str.equals(rs.getString(1)))
+                {
+                    podstawa.setlogin(login.getText());
+                    podstawa.Projekty_uzytkownicy();
+                }
+                else
+                {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.initOwner(podstawa.getstage());
+                    alert.setTitle("Błąd logowania");
+                    alert.setHeaderText("Złe hasło");
+                    alert.setContentText("Proszę podać ponownie hasło");
+                    alert.showAndWait();
+                }    
             } while (rs.next());
         }
     }

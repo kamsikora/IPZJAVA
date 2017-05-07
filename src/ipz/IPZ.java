@@ -80,7 +80,7 @@ public class IPZ extends Application {
     }
     
     public void Projekty_uzytkownicy() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("projekty_uzytkownicy.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Projekty_uzytkownicy.fxml"));
         loader.load();
         Parent root = loader.getRoot();
         Projekty_uzytkownicy controller = loader.getController();
@@ -91,7 +91,22 @@ public class IPZ extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
+    public void showDialogEdycja(Osoba osoba) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edycja.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Edycja");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(stage);
+        Scene scene = new Scene(root);
+        dialogStage.setScene(scene);
+        Edycja controller = loader.getController();
+        controller.setDialog(dialogStage);
+        controller.setPerson(osoba);
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
     public void showDialogRejestracja() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Rejestracja.fxml"));
         loader.load();

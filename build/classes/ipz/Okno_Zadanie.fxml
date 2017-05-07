@@ -13,7 +13,7 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -22,18 +22,18 @@
                   <Tooltip text="Podaj nazwę zadania" />
                </tooltip></TextField>
             <Label text="Nazwa Zadania" />
-            <Label text="Start" GridPane.rowIndex="1" />
-            <DatePicker fx:id="start" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Czas (h)" GridPane.rowIndex="1" />
+            <Label text="Opis" GridPane.rowIndex="2" />
+            <TextField fx:id="czas" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
-                  <Tooltip text="Podaj datę początku zadania" />
+                  <Tooltip text="Podaj czas zadania" />
                </tooltip>
-            </DatePicker>
-            <Label text="Koniec" GridPane.rowIndex="2" />
-            <DatePicker fx:id="koniec" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            </TextField>
+            <TextField fx:id="opis" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <tooltip>
-                  <Tooltip text="Podaj datę końca zadania" />
+                  <Tooltip text="Podaj opis zadania" />
                </tooltip>
-            </DatePicker>
+            </TextField>
          </children>
       </GridPane>
       <HBox AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

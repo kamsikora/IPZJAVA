@@ -5,19 +5,24 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
    <children>
-      <TableView fx:id="tabela" prefHeight="400.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="tabela" onMouseClicked="#usuwanie" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="5.0">
         <columns>
-          <TableColumn fx:id="imie" prefWidth="110.0" text="Imię" />
-          <TableColumn fx:id="nazwisko" prefWidth="117.0" text="Nazwisko" />
-            <TableColumn fx:id="email" minWidth="0.0" prefWidth="153.0" text="Email" />
-            <TableColumn fx:id="ranga" prefWidth="69.0" text="Ranga" />
+          <TableColumn fx:id="imie" text="Imię" />
+          <TableColumn fx:id="nazwisko" text="Nazwisko" />
+            <TableColumn fx:id="email" text="Email" />
+            <TableColumn fx:id="ranga" text="Ranga" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <VBox AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+      <VBox AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#dodaj" text="Dodaj użytkownika" />
+            <Button mnemonicParsing="false" onAction="#dodaj" prefWidth="120.0" text="Dodaj użytkownika" />
+            <Button fx:id="edycja" disable="true" mnemonicParsing="false" onAction="#edytuj" prefWidth="120.0" text="Edytuj użytkownika" />
+            <Button fx:id="usun" disable="true" mnemonicParsing="false" onAction="#usun" prefWidth="120.0" text="Usuń użytkownika" />
          </children>
       </VBox>
       <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />

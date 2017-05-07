@@ -15,23 +15,28 @@ import javafx.beans.property.StringProperty;
 public class Zadanie {
     
     private final StringProperty Nazwa;
-    private final StringProperty Data_rozpoczecia;
-    private final StringProperty Data_zakonczenia;
+    private final StringProperty Czas;
+    private final StringProperty Opis;
+    private final StringProperty Stan;
 
-    public Zadanie(String Nazwa, String Data_rozpoczecia, String Data_zakonczenia) {
+    public Zadanie(String Nazwa, String Czas, String Opis, String Stan) {
         this.Nazwa = new SimpleStringProperty(Nazwa);
-        this.Data_rozpoczecia = new SimpleStringProperty(Data_rozpoczecia);
-        this.Data_zakonczenia = new SimpleStringProperty(Data_zakonczenia);
+        this.Czas = new SimpleStringProperty(Czas);
+        this.Opis = new SimpleStringProperty(Opis);
+        this.Stan = new SimpleStringProperty(Stan);
     }
  
     public StringProperty NazwaProperty() {
         return Nazwa;
     }
-    public StringProperty Data_rozpoczeciaProperty() {
-        return Data_rozpoczecia;
+    public StringProperty CzasProperty() {
+        return Czas;
     }
-    public StringProperty Data_zakonczeniaProperty() {
-        return Data_zakonczenia;
+    public StringProperty OpisProperty() {
+        return Opis;
+    }
+    public StringProperty StanProperty() {
+        return Stan;
     }
 }
 

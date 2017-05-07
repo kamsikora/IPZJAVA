@@ -41,10 +41,25 @@ public class Okno {
     public ObservableList<Sprint> getSprintData() {
         return sprintData;
     }
+    private final ObservableList<Zadanie> zadanieData = FXCollections.observableArrayList();
+    public ObservableList<Zadanie> getZadanieData() {
+        return zadanieData;
+    }
+    
+    @FXML
+    private TableColumn<Zadanie, String> czas;
+    @FXML
+    private TableColumn<Zadanie, String> opis;
+    @FXML
+    private TableColumn<Zadanie, String> stan;
+    @FXML
+    private TableView<Sprint> tabelaS;
+    @FXML
+    private TableView<Zadanie> tabelaZ;
+    @FXML
+    private TableColumn<Zadanie, String> zadanie;
     @FXML
     private Label projekt;
-    @FXML
-    private TableView<Sprint> tabela;
     @FXML
     private TableColumn<Sprint, String> sprint;
     @FXML
@@ -133,7 +148,13 @@ public class Okno {
         @Override
         public void changed(ObservableValue ov, Projekt oldValue, Projekt newValue)  {
             sprintData.removeAll(sprintData);
-            tabela.setItems(getSprintData());
+            zadanieData.removeAll(zadanieData);
+            tabelaS.setItems(getSprintData());
+            tabelaZ.setItems(getZadanieData());
+            zadanie.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
+            czas.setCellValueFactory(cellData -> cellData.getValue().CzasProperty());
+            opis.setCellValueFactory(cellData -> cellData.getValue().OpisProperty());
+            stan.setCellValueFactory(cellData -> cellData.getValue().StanProperty());
             sprint.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
             dataroz.setCellValueFactory(cellData -> cellData.getValue().Data_rozpoczeciaProperty());
             datazak.setCellValueFactory(cellData -> cellData.getValue().Data_zakonczeniaProperty());
@@ -143,8 +164,13 @@ public class Okno {
                 con = DriverManager.getConnection(url, user, password);
                 rs = st.executeQuery("SELECT * FROM  `sprint_to_projekt` INNER JOIN  `sprint` ON  `sprint_to_projekt`.`id_sprint` =  `sprint`.`id` INNER JOIN  `projekt` ON  `sprint_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getnazwa()+"\"");
                 while(rs.next()) { 
-                    sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));
+                    sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));   
                 }
+                rs = st.executeQuery("SELECT * FROM  `zadanie_to_projekt` INNER JOIN  `zadanie` ON  `zadanie_to_projekt`.`id_zadanie` =  `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN  `projekt` ON  `zadanie_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getnazwa()+"\"");
+                while(rs.next()) { 
+                    zadanieData.add(new Zadanie(rs.getString("nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("stan.nazwa")));   
+                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Okno.class.getName()).log(Level.SEVERE, null, ex);
             }

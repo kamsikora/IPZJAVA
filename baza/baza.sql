@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Czas generowania: 29 Kwi 2017, 20:44
+-- Czas generowania: 07 Maj 2017, 17:52
 -- Wersja serwera: 8.0.1-dmr
 -- Wersja PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -52,7 +52,8 @@ CREATE TABLE `rola` (
 
 INSERT INTO `rola` (`id`, `nazwa`) VALUES
 (1, 'Administrator'),
-(2, 'Pracownik');
+(2, 'Pracownik'),
+(3, 'Kierownik');
 
 -- --------------------------------------------------------
 
@@ -156,9 +157,9 @@ CREATE TABLE `uzytkownik` (
 
 INSERT INTO `uzytkownik` (`id`, `imie`, `nazwisko`, `login`, `email`, `haslo`, `id_rola`) VALUES
 (1, 'Kamil', 'Sikora', 'araks', 'araks1994@gmail.com', '69d773b109137f226d62f943f96414b7', 1),
-(2, 'a', 'a', 'a', 'a@a.a', '0cc175b9c0f1b6a831c399e269772661', 1),
+(2, 'A', 'A', 'a', 'a@a.a', '0cc175b9c0f1b6a831c399e269772661', 3),
 (3, 'b', 'b', 'b', 'b@b.b', '92eb5ffee6ae2fec3ad71c777531578f', 2),
-(4, 'c', 'c', 'c', 'c@c.c', '4a8a08f09d37b73795649038408b5f33', 2);
+(4, 'C', 'C', 'c', 'c@c.c', '4a8a08f09d37b73795649038408b5f33', 2);
 
 -- --------------------------------------------------------
 
@@ -182,8 +183,8 @@ CREATE TABLE `uzytkownik_to_projekt` (
 CREATE TABLE `zadanie` (
   `id` int(11) NOT NULL,
   `nazwa` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_rozpoczecia` date NOT NULL,
-  `data_zakonczenia` date NOT NULL,
+  `czas` int(11) NOT NULL,
+  `opis` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_stan` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -191,8 +192,11 @@ CREATE TABLE `zadanie` (
 -- Zrzut danych tabeli `zadanie`
 --
 
-INSERT INTO `zadanie` (`id`, `nazwa`, `data_rozpoczecia`, `data_zakonczenia`, `id_stan`) VALUES
-(1, 'Programowanie', '2017-04-29', '2017-04-29', 1);
+INSERT INTO `zadanie` (`id`, `nazwa`, `czas`, `opis`, `id_stan`) VALUES
+(1, 'Programowanie', 8, 'Kod programu', 1),
+(2, 'Testowanie', 12, 'Testowanie aplikacji', 1),
+(3, 'Testowanie', 24, 'Testowanie aplikacji', 1),
+(4, 'Implementacja', 32, 'Implementacja kodu', 1);
 
 -- --------------------------------------------------------
 
@@ -211,7 +215,10 @@ CREATE TABLE `zadanie_to_projekt` (
 --
 
 INSERT INTO `zadanie_to_projekt` (`id`, `id_projekt`, `id_zadanie`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 2, 2),
+(3, 1, 3),
+(4, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -319,7 +326,7 @@ ALTER TABLE `projekt`
 -- AUTO_INCREMENT dla tabeli `rola`
 --
 ALTER TABLE `rola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT dla tabeli `sprint`
 --
@@ -344,7 +351,7 @@ ALTER TABLE `stanowisko`
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT dla tabeli `uzytkownik_to_projekt`
 --
@@ -354,12 +361,12 @@ ALTER TABLE `uzytkownik_to_projekt`
 -- AUTO_INCREMENT dla tabeli `zadanie`
 --
 ALTER TABLE `zadanie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `zadanie_to_projekt`
 --
 ALTER TABLE `zadanie_to_projekt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `zadanie_to_sprint`
 --

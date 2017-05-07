@@ -5,10 +5,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
       <Button mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-      <Label fx:id="info" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="info" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
       <VBox AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
          <children>
             <Button mnemonicParsing="false" onAction="#dodaj_P" prefWidth="150.0" text="Dodaj projekt" />
@@ -17,14 +17,32 @@
             <Button disable="true" mnemonicParsing="false" onAction="#pokaz" prefWidth="150.0" text="Pokaż użytkowników" />
          </children>
       </VBox>
-      <ComboBox fx:id="lista" prefWidth="150.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <Label fx:id="projekt" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
-      <TableView fx:id="tabela" prefHeight="325.0" prefWidth="431.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="70.0">
-        <columns>
-          <TableColumn fx:id="sprint" prefWidth="124.0" text="Sprinty" />
-            <TableColumn fx:id="dataroz" prefWidth="153.0" text="Data rozpoczecia" />
-            <TableColumn fx:id="datazak" prefWidth="150.0" text="Data zakończenia" />
-        </columns>
-      </TableView>
+      <ComboBox fx:id="lista" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="projekt" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+      <HBox layoutX="283.0" layoutY="-23.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <TableView fx:id="tabelaS" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="sprint" text="Sprinty" />
+                  <TableColumn fx:id="dataroz" text="Data rozpoczecia" />
+                  <TableColumn fx:id="datazak" text="Data zakończenia" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <TableView fx:id="tabelaZ" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="zadanie" text="Zadanie" />
+                <TableColumn fx:id="czas" text="Czas (h)" />
+                  <TableColumn fx:id="opis" text="Opis" />
+                  <TableColumn fx:id="stan" text="Stan" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

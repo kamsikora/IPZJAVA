@@ -10,12 +10,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -24,6 +29,8 @@ import javafx.scene.control.TableView;
 public class Okno_osob {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
+    @FXML
+    private Button edycja;
     public ObservableList<Osoba> getPersonData() {
         return personData;
     }
@@ -43,13 +50,15 @@ public class Okno_osob {
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"))); 
+            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"))); 
         }
     }
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
         tabela.setItems(getPersonData());
     }
+    @FXML
+    private Button usun;
     @FXML
     private TableView<Osoba> tabela;
     @FXML
@@ -71,9 +80,41 @@ public class Okno_osob {
         podstawa.showDialogRejestracja();
     }
     public void initialize() {
-        imie.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        nazwisko.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        imie.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
+        nazwisko.setCellValueFactory(cellData -> cellData.getValue().nazwiskoProperty());
         email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         ranga.setCellValueFactory(cellData -> cellData.getValue().rangaProperty());
     } 
+
+    @FXML
+    private void usun(ActionEvent event) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Usuwanie użytkownika");
+        alert.setHeaderText("Czy napewno chcesz usunąć użytkownika?");
+
+        ButtonType buttonTypeOne = new ButtonType("Tak");
+        ButtonType buttonTypeCancel = new ButtonType("Nie");
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
+        } 
+        else 
+        {
+            alert.close();
+        }  
+    }
+    private Osoba osoba;
+    @FXML
+    private void usuwanie(MouseEvent event) {
+        usun.setDisable(false);
+        edycja.setDisable(false);
+        osoba = tabela.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void edytuj(ActionEvent event) throws Exception {
+        podstawa.showDialogEdycja(osoba);
+    }
 }
