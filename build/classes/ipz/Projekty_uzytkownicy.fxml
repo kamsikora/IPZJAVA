@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Projekty_uzytkownicy">
    <children>
-      <Label fx:id="info" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <HBox layoutX="60.0" layoutY="150.0" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
+      <Label fx:id="info" style="-fx-background-color: white;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <HBox spacing="10.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
          <children>
             <Button maxHeight="200.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#projekty" text="Projekty" HBox.hgrow="ALWAYS" />
             <Button maxHeight="200.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#uzytkownicy" text="Użytkownicy" HBox.hgrow="ALWAYS" />

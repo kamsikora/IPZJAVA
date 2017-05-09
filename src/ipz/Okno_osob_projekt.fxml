@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob_projekt">
+   <children>
+      <VBox AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Label text="Użytkownicy w projekcie" />
+            <TableView fx:id="tabelaP" onMouseClicked="#usuwanie" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <columns>
+                  <TableColumn fx:id="imieP" text="Imię" />
+                  <TableColumn fx:id="nazwiskoP" text="Nazwisko" />
+                  <TableColumn fx:id="emailP" text="Email" />
+                  <TableColumn fx:id="stanowiskoP" text="Stanowisko" />
+               </columns>
+            </TableView>
+            <Label text="Użytkownicy poza projektem" />
+            <TableView fx:id="tabelaW" onMouseClicked="#dodawanie" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <columns>
+                  <TableColumn fx:id="imieW" text="Imię" />
+                  <TableColumn fx:id="nazwiskoW" text="Nazwisko" />
+                  <TableColumn fx:id="emailW" text="Email" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <VBox AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Button fx:id="dodaj" disable="true" mnemonicParsing="false" onAction="#dodaj" prefWidth="120.0" text="Dodaj użytkownika do projektu" wrapText="true" />
+            <Button fx:id="usun" disable="true" mnemonicParsing="false" onAction="#usun" prefWidth="120.0" text="Usuń użytkownika z projektu" wrapText="true" />
+         </children>
+      </VBox>
+      <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+   </children>
+</AnchorPane>

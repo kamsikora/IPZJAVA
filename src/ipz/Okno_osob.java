@@ -29,8 +29,6 @@ import javafx.scene.input.MouseEvent;
 public class Okno_osob {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
-    @FXML
-    private Button edycja;
     public ObservableList<Osoba> getPersonData() {
         return personData;
     }
@@ -50,15 +48,18 @@ public class Okno_osob {
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"))); 
+            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),"")); 
         }
     }
+    
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
         tabela.setItems(getPersonData());
     }
     @FXML
     private Button usun;
+    @FXML
+    private Button edycja;
     @FXML
     private TableView<Osoba> tabela;
     @FXML
@@ -78,6 +79,7 @@ public class Okno_osob {
     @FXML
     private void dodaj(ActionEvent event) throws Exception {
         podstawa.showDialogRejestracja();
+        podstawa.Okno_osob();
     }
     public void initialize() {
         imie.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
@@ -87,7 +89,7 @@ public class Okno_osob {
     } 
 
     @FXML
-    private void usun(ActionEvent event) throws SQLException {
+    private void usun(ActionEvent event) throws SQLException, Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Usuwanie użytkownika");
         alert.setHeaderText("Czy napewno chcesz usunąć użytkownika?");
@@ -104,6 +106,7 @@ public class Okno_osob {
         {
             alert.close();
         }  
+        podstawa.Okno_osob();
     }
     private Osoba osoba;
     @FXML
@@ -116,5 +119,6 @@ public class Okno_osob {
     @FXML
     private void edytuj(ActionEvent event) throws Exception {
         podstawa.showDialogEdycja(osoba);
+        podstawa.Okno_osob();
     }
 }

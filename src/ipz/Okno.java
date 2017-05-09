@@ -47,6 +47,8 @@ public class Okno {
     }
     
     @FXML
+    private Button pokaz;
+    @FXML
     private TableColumn<Zadanie, String> czas;
     @FXML
     private TableColumn<Zadanie, String> opis;
@@ -107,6 +109,7 @@ public class Okno {
     
     @FXML
     private void pokaz(ActionEvent event) throws Exception  {
+        podstawa.Okno_osob_projekt();
     }
     public void initialize() {
         lista.getSelectionModel().selectFirst();
@@ -176,6 +179,7 @@ public class Okno {
             }
             sprinton.setDisable(false);
             zadanieon.setDisable(false);
+            pokaz.setDisable(false);
         }
         });
     }  
@@ -188,15 +192,18 @@ public class Okno {
     @FXML
     private void dodaj_P(ActionEvent event) throws Exception {
         podstawa.showDialogProjekt();
+        podstawa.Okno();
     }
 
     @FXML
     private void dodaj_S(ActionEvent event) throws Exception {
         podstawa.showDialogSprint();
+        podstawa.Okno();
     }
 
     @FXML
     private void dodaj_Z(ActionEvent event) throws Exception {
         podstawa.showDialogZadanie();
+        podstawa.Okno();
     }
 }

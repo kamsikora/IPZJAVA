@@ -19,14 +19,16 @@ public class Osoba {
     private final StringProperty ranga;
     private final StringProperty login;
     private final StringProperty haslo;
+    private final StringProperty stanowisko;
     
-    public Osoba(String imie, String nazwisko, String email, String ranga, String login, String haslo) {
+    public Osoba(String imie, String nazwisko, String email, String ranga, String login, String haslo, String stanowisko) {
         this.imie = new SimpleStringProperty(imie);
         this.nazwisko = new SimpleStringProperty(nazwisko);
         this.email = new SimpleStringProperty(email);
         this.ranga = new SimpleStringProperty(ranga);
         this.login = new SimpleStringProperty(login);
         this.haslo = new SimpleStringProperty(haslo);
+        this.stanowisko = new SimpleStringProperty(stanowisko);
     }
  
     public StringProperty imieProperty() {
@@ -40,6 +42,9 @@ public class Osoba {
     }
     public StringProperty rangaProperty() {
         return ranga;
+    }
+    public StringProperty stanowiskoProperty() {
+        return stanowisko;
     }
     public String getLogin() {
         return login.get();

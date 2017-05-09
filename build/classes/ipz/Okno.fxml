@@ -8,17 +8,17 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
       <Button mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-      <Label fx:id="info" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="info" style="-fx-background-color: white;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
       <VBox AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
          <children>
             <Button mnemonicParsing="false" onAction="#dodaj_P" prefWidth="150.0" text="Dodaj projekt" />
             <Button fx:id="sprinton" disable="true" mnemonicParsing="false" onAction="#dodaj_S" prefWidth="150.0" text="Dodaj sprint do projektu" />
             <Button fx:id="zadanieon" disable="true" mnemonicParsing="false" onAction="#dodaj_Z" prefWidth="150.0" text="Dodaj zadanie do projektu" />
-            <Button disable="true" mnemonicParsing="false" onAction="#pokaz" prefWidth="150.0" text="Pokaż użytkowników" />
+            <Button fx:id="pokaz" disable="true" mnemonicParsing="false" onAction="#pokaz" prefWidth="150.0" text="Pokaż użytkowników w projekcie" wrapText="true" />
          </children>
       </VBox>
-      <ComboBox fx:id="lista" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <Label fx:id="projekt" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+      <ComboBox fx:id="lista" prefWidth="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="projekt" style="-fx-background-color: white;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
       <HBox layoutX="283.0" layoutY="-23.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="70.0">
          <children>
             <TableView fx:id="tabelaS" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">

@@ -46,6 +46,7 @@ public class FXMLDocumentController implements Initializable {
     private IPZ podstawa;
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
+        
     }
     @FXML
     private void logowanie(ActionEvent event) throws SQLException, Exception {

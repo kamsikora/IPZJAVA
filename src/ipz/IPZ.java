@@ -65,6 +65,18 @@ public class IPZ extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public void Okno_osob_projekt() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_osob_projekt.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Okno_osob_projekt controller = loader.getController();
+        controller.Setglowny(this);
+        
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        stage.setScene(scene);
+        stage.show();
+    }
     
     public void Okno_osob() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Okno_osob.fxml"));
