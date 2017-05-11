@@ -46,7 +46,7 @@ public class Okno_Projekt {
 
     @FXML
     private void ok(ActionEvent event) throws SQLException {
-        if(nazwa.getText().trim().equals("") || start.getValue()==null || koniec.getValue()==null)
+        if(nazwa.getText().trim().equals("") || start.getValue()==null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
@@ -57,10 +57,20 @@ public class Okno_Projekt {
         }
         else
         {
-            con = DriverManager.getConnection(url, user, password);
-            st = con.createStatement();
-            st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
-            dialog.close();
+            if(koniec.getValue()==null) 
+            {
+                con = DriverManager.getConnection(url, user, password);
+                st = con.createStatement();
+                st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\")");
+                dialog.close();
+            }
+            else 
+            {
+                con = DriverManager.getConnection(url, user, password);
+                st = con.createStatement();
+                st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
+                dialog.close();
+            }
         }
     }
 
