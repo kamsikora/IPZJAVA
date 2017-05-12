@@ -84,7 +84,7 @@ public class Okno_osob_projekt {
         this.podstawa=podstawa;   
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getnazwaProjekt()+"\"");
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getnazwaProjekt()+"\"");
         while(rs.next()) { 
             personDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"))); 
         }

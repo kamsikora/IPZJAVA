@@ -90,23 +90,53 @@ public class Okno_osob {
 
     @FXML
     private void usun(ActionEvent event) throws SQLException, Exception {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Usuwanie użytkownika");
-        alert.setHeaderText("Czy napewno chcesz usunąć użytkownika?");
+        con = DriverManager.getConnection(url, user, password);
+        st = con.createStatement();
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` WHERE `login` =\""+osoba.getLogin()+"\"");
+        if(rs.absolute(1)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Usuwanie użytkownika");
+            alert.setHeaderText("Użytkownik "+osoba.getImie()+" "+osoba.getNazwisko()+" jest przypisany do projektu, czy napewno chcesz usunąć użytkownika?");
 
-        ButtonType buttonTypeOne = new ButtonType("Tak");
-        ButtonType buttonTypeCancel = new ButtonType("Nie");
+            ButtonType buttonTypeOne = new ButtonType("Tak");
+            ButtonType buttonTypeCancel = new ButtonType("Nie");
 
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne){
-            st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
-        } 
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                con = DriverManager.getConnection(url, user, password);
+                st = con.createStatement();
+                st.executeUpdate("DELETE FROM `uzytkownik_to_projekt` WHERE `id_uzytkownik` = (SELECT `id` FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\")"); 
+                st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
+            } 
+            else 
+            {
+                alert.close();
+            }  
+            podstawa.Okno_osob();
+        }
         else 
         {
-            alert.close();
-        }  
-        podstawa.Okno_osob();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Usuwanie użytkownika");
+            alert.setHeaderText("Czy napewno chcesz usunąć użytkownika?");
+
+            ButtonType buttonTypeOne = new ButtonType("Tak");
+            ButtonType buttonTypeCancel = new ButtonType("Nie");
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                con = DriverManager.getConnection(url, user, password);
+                st = con.createStatement();
+                st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
+            } 
+            else 
+            {
+                alert.close();
+            }  
+            podstawa.Okno_osob();
+        }
     }
     private Osoba osoba;
     @FXML
