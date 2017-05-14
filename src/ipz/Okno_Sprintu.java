@@ -40,6 +40,17 @@ public class Okno_Sprintu {
     private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
+    
+    private boolean okClicked = false;
+    
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    
+    private Sprint sprint;
+    public void setSprint(Sprint sprint) {
+        this.sprint=sprint;
+    }
 
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
@@ -68,7 +79,11 @@ public class Okno_Sprintu {
             st = con.createStatement();
             st.executeUpdate("INSERT INTO `sprint`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
             st.executeUpdate("SET @id_sprint = LAST_INSERT_ID()");
-            st.executeUpdate("INSERT INTO `sprint_to_projekt` (`id_projekt`, `id_sprint`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getnazwaProjekt()+"\"),@id_sprint)");
+            st.executeUpdate("INSERT INTO `sprint_to_projekt` (`id_projekt`, `id_sprint`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getNazwaProjekt()+"\"),@id_sprint)");
+            sprint.setNazwa(nazwa.getText());
+            sprint.setData_rozpoczecia(start.getValue().toString());
+            sprint.setData_zakonczenia(koniec.getValue().toString());
+            okClicked = true;
             dialog.close();
         }
     }

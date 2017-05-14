@@ -17,13 +17,19 @@ public class Zadanie {
     private final StringProperty Nazwa;
     private final StringProperty Czas;
     private final StringProperty Opis;
+    private final StringProperty OpisD;
     private final StringProperty Stan;
 
-    public Zadanie(String Nazwa, String Czas, String Opis, String Stan) {
+    public Zadanie(String Nazwa, String Czas, String Opis, String OpisD, String Stan) {
         this.Nazwa = new SimpleStringProperty(Nazwa);
         this.Czas = new SimpleStringProperty(Czas);
         this.Opis = new SimpleStringProperty(Opis);
+        this.OpisD = new SimpleStringProperty(OpisD);
         this.Stan = new SimpleStringProperty(Stan);
+    }
+
+    public Zadanie() {
+        this(null, null, null, null, null);
     }
  
     public StringProperty NazwaProperty() {
@@ -35,8 +41,26 @@ public class Zadanie {
     public StringProperty OpisProperty() {
         return Opis;
     }
+    public StringProperty OpisDProperty() {
+        return OpisD;
+    }
     public StringProperty StanProperty() {
         return Stan;
+    }
+    public void setNazwa(String Nazwa) {
+        this.Nazwa.set(Nazwa);
+    }
+    public void setCzas(String Czas) {
+        this.Czas.set(Czas);
+    }
+    public void setOpis(String Opis) {
+        this.Opis.set(Opis);
+    }
+    public void setOpisD(String OpisD) {
+        this.OpisD.set(OpisD);
+    }
+    public void setStan(String Stan) {
+        this.Stan.set(Stan);
     }
 }
 

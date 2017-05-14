@@ -101,7 +101,7 @@ public class Okno {
         lista.setItems(getProjektData());
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` WHERE  `login` = \""+podstawa.getlogin()+"\"");
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` WHERE  `login` = \""+podstawa.getLogin()+"\"");
         while(rs.next()) { 
             info.setText("Zalogowany jako: "+rs.getString("imie")+" "+rs.getString("nazwisko")+"\nRola: "+rs.getString("nazwa"));
         }
@@ -122,7 +122,7 @@ public class Okno {
                 public void updateItem(Projekt item, boolean empty){
                     super.updateItem(item, empty);
                     if(!empty) {
-                        setText(item.getnazwa());
+                        setText(item.getNazwa());
                         setGraphic(null);
                     } 
                     else 
@@ -139,7 +139,7 @@ public class Okno {
         public void updateItem(Projekt item, boolean empty) {
             super.updateItem(item, empty); 
             if(!empty) {
-                setText(item.getnazwa());
+                setText(item.getNazwa());
             } 
             else 
             {
@@ -161,17 +161,17 @@ public class Okno {
             sprint.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
             dataroz.setCellValueFactory(cellData -> cellData.getValue().Data_rozpoczeciaProperty());
             datazak.setCellValueFactory(cellData -> cellData.getValue().Data_zakonczeniaProperty());
-            podstawa.setnazwaProjekt(newValue.getnazwa());
+            podstawa.setNazwaProjekt(newValue.getNazwa());
             try {
-                projekt.setText("Nazwa projektu: "+newValue.getnazwa()+"\nData rozpoczęcia: "+newValue.getdata_rozpoczecia()+" Data zakończenia: "+newValue.getdata_zakonczenia());
+                projekt.setText("Nazwa projektu: "+newValue.getNazwa()+"\nData rozpoczęcia: "+newValue.getData_rozpoczecia()+" Data zakończenia: "+newValue.getData_zakonczenia());
                 con = DriverManager.getConnection(url, user, password);
-                rs = st.executeQuery("SELECT * FROM  `sprint_to_projekt` INNER JOIN  `sprint` ON  `sprint_to_projekt`.`id_sprint` =  `sprint`.`id` INNER JOIN  `projekt` ON  `sprint_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getnazwa()+"\"");
+                rs = st.executeQuery("SELECT * FROM  `sprint_to_projekt` INNER JOIN  `sprint` ON  `sprint_to_projekt`.`id_sprint` =  `sprint`.`id` INNER JOIN  `projekt` ON  `sprint_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getNazwa()+"\"");
                 while(rs.next()) { 
                     sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));   
                 }
-                rs = st.executeQuery("SELECT * FROM  `zadanie_to_projekt` INNER JOIN  `zadanie` ON  `zadanie_to_projekt`.`id_zadanie` =  `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN  `projekt` ON  `zadanie_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getnazwa()+"\"");
+                rs = st.executeQuery("SELECT * FROM  `zadanie_to_projekt` INNER JOIN  `zadanie` ON  `zadanie_to_projekt`.`id_zadanie` =  `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN  `projekt` ON  `zadanie_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getNazwa()+"\"");
                 while(rs.next()) { 
-                    zadanieData.add(new Zadanie(rs.getString("nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("stan.nazwa")));   
+                    zadanieData.add(new Zadanie(rs.getString("nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa")));   
                 }
                 
             } catch (SQLException ex) {
@@ -191,19 +191,28 @@ public class Okno {
 
     @FXML
     private void dodaj_P(ActionEvent event) throws Exception {
-        podstawa.showDialogProjekt();
-        podstawa.Okno();
+        Projekt tempProjekt = new Projekt();
+        boolean okClicked = podstawa.showDialogProjekt(tempProjekt);
+        if (okClicked) {
+            getProjektData().add(tempProjekt);
+        }
     }
 
     @FXML
     private void dodaj_S(ActionEvent event) throws Exception {
-        podstawa.showDialogSprint();
-        podstawa.Okno();
+        Sprint tempSprint = new Sprint();
+        boolean okClicked = podstawa.showDialogSprint(tempSprint);
+        if (okClicked) {
+            getSprintData().add(tempSprint);
+        }
     }
 
     @FXML
     private void dodaj_Z(ActionEvent event) throws Exception {
-        podstawa.showDialogZadanie();
-        podstawa.Okno();
+        Zadanie tempZadanie = new Zadanie();
+        boolean okClicked = podstawa.showDialogZadanie(tempZadanie);
+        if (okClicked) {
+            getZadanieData().add(tempZadanie);
+        }
     }
 }

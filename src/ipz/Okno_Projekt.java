@@ -40,6 +40,17 @@ public class Okno_Projekt {
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
     
+    private boolean okClicked = false;
+    
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    
+    private Projekt projekt;
+    public void setProjekt(Projekt projekt) {
+        this.projekt=projekt;
+    }
+    
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
     }
@@ -62,6 +73,10 @@ public class Okno_Projekt {
                 con = DriverManager.getConnection(url, user, password);
                 st = con.createStatement();
                 st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\")");
+                projekt.setNazwa(nazwa.getText());
+                projekt.setData_rozpoczecia(start.getValue().toString());
+                projekt.setData_zakonczenia("null");
+                okClicked = true;
                 dialog.close();
             }
             else 
@@ -69,6 +84,10 @@ public class Okno_Projekt {
                 con = DriverManager.getConnection(url, user, password);
                 st = con.createStatement();
                 st.executeUpdate("INSERT INTO `projekt`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
+                projekt.setNazwa(nazwa.getText());
+                projekt.setData_rozpoczecia(start.getValue().toString());
+                projekt.setData_zakonczenia(koniec.getValue().toString());
+                okClicked = true;
                 dialog.close();
             }
         }

@@ -29,7 +29,7 @@ import javafx.scene.input.MouseEvent;
 public class Okno_osob {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
-    public ObservableList<Osoba> getPersonData() {
+    public ObservableList<Osoba> getOsobaData() {
         return personData;
     }
     
@@ -54,7 +54,7 @@ public class Okno_osob {
     
     public void Setglowny(IPZ podstawa) {
         this.podstawa=podstawa;
-        tabela.setItems(getPersonData());
+        tabela.setItems(getOsobaData());
     }
     @FXML
     private Button usun;
@@ -78,8 +78,11 @@ public class Okno_osob {
 
     @FXML
     private void dodaj(ActionEvent event) throws Exception {
-        podstawa.showDialogRejestracja();
-        podstawa.Okno_osob();
+        Osoba tempOsoba = new Osoba();
+        boolean okClicked = podstawa.showDialogRejestracja(tempOsoba);
+        if (okClicked) {
+            getOsobaData().add(tempOsoba);
+        }
     }
     public void initialize() {
         imie.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
@@ -108,12 +111,12 @@ public class Okno_osob {
                 st = con.createStatement();
                 st.executeUpdate("DELETE FROM `uzytkownik_to_projekt` WHERE `id_uzytkownik` = (SELECT `id` FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\")"); 
                 st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
+                getOsobaData().remove(osoba);
             } 
             else 
             {
                 alert.close();
             }  
-            podstawa.Okno_osob();
         }
         else 
         {
@@ -130,12 +133,12 @@ public class Okno_osob {
                 con = DriverManager.getConnection(url, user, password);
                 st = con.createStatement();
                 st.executeUpdate("DELETE FROM `uzytkownik` WHERE `login` =\""+osoba.getLogin()+"\""); 
+                getOsobaData().remove(osoba);
             } 
             else 
             {
                 alert.close();
             }  
-            podstawa.Okno_osob();
         }
     }
     private Osoba osoba;
@@ -148,7 +151,6 @@ public class Okno_osob {
 
     @FXML
     private void edytuj(ActionEvent event) throws Exception {
-        podstawa.showDialogEdycja(osoba);
-        podstawa.Okno_osob();
+       podstawa.showDialogEdycja(osoba);
     }
 }

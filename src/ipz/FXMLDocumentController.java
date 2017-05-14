@@ -58,7 +58,7 @@ public class FXMLDocumentController implements Initializable {
         String str = String.format("%032x", new BigInteger(1, md5.digest()));
         if(!rs.next()) {
             Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(podstawa.getstage());
+            alert.initOwner(podstawa.getStage());
             alert.setTitle("Błąd logowania");
             alert.setHeaderText("Zły login");
             alert.setContentText("Proszę podać ponownie login");
@@ -67,13 +67,14 @@ public class FXMLDocumentController implements Initializable {
             do {
                 if(str.equals(rs.getString(1)))
                 {
-                    podstawa.setlogin(login.getText());
+                    System.out.println(podstawa.getStage().getWidth()+" "+podstawa.getStage().getHeight());
+                    podstawa.setLogin(login.getText());
                     podstawa.Projekty_uzytkownicy();
                 }
                 else
                 {
                     Alert alert = new Alert(AlertType.WARNING);
-                    alert.initOwner(podstawa.getstage());
+                    alert.initOwner(podstawa.getStage());
                     alert.setTitle("Błąd logowania");
                     alert.setHeaderText("Złe hasło");
                     alert.setContentText("Proszę podać ponownie hasło");

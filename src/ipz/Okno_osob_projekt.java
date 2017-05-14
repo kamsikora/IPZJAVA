@@ -84,7 +84,7 @@ public class Okno_osob_projekt {
         this.podstawa=podstawa;   
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getnazwaProjekt()+"\"");
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getNazwaProjekt()+"\"");
         while(rs.next()) { 
             personDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"))); 
         }
@@ -147,7 +147,7 @@ public class Okno_osob_projekt {
         if (result.isPresent()){
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
-            st.executeUpdate("INSERT INTO `uzytkownik_to_projekt`(`id_projekt`, `id_uzytkownik`, `id_stanowisko`) VALUES ((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+podstawa.getnazwaProjekt()+"\"),(SELECT `id` FROM  `uzytkownik` WHERE  `login` = \""+osoba.getLogin()+"\"),(SELECT `id` FROM  `stanowisko` WHERE  `nazwa` = \""+result.get()+"\"))");
+            st.executeUpdate("INSERT INTO `uzytkownik_to_projekt`(`id_projekt`, `id_uzytkownik`, `id_stanowisko`) VALUES ((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+podstawa.getNazwaProjekt()+"\"),(SELECT `id` FROM  `uzytkownik` WHERE  `login` = \""+osoba.getLogin()+"\"),(SELECT `id` FROM  `stanowisko` WHERE  `nazwa` = \""+result.get()+"\"))");
         }    
     podstawa.Okno_osob_projekt();        
     }

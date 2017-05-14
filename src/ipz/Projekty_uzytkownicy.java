@@ -39,7 +39,7 @@ public class Projekty_uzytkownicy {
         this.podstawa=podstawa;
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` WHERE  `login` = \""+podstawa.getlogin()+"\"");
+        rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id` WHERE  `login` = \""+podstawa.getLogin()+"\"");
         while(rs.next()) { 
             info.setText("Zalogowany jako: "+rs.getString("imie")+" "+rs.getString("nazwisko")+"\nRola: "+rs.getString("nazwa"));
         }
@@ -59,6 +59,7 @@ public class Projekty_uzytkownicy {
 
     @FXML
     private void wyjscie(ActionEvent event) {
+        System.out.println(podstawa.getStage().getWidth()+" "+podstawa.getStage().getHeight());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Zamykanie aplikacji");
         alert.setHeaderText("Czy chcesz wyłączyć program?");
@@ -71,7 +72,7 @@ public class Projekty_uzytkownicy {
         if (result.get() == buttonTypeOne){
 //            Stage stage = (Stage) exit.getScene().getWindow();
 //            stage.close();
-              podstawa.getstage().close();
+              podstawa.getStage().close();
         } 
         else 
         {

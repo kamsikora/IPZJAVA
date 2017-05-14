@@ -13,6 +13,7 @@ import java.sql.Statement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,7 +29,9 @@ public class Okno_Zadanie {
     private TextField czas;
     @FXML
     private TextField opis;
-
+    @FXML
+    private TextArea opisD;
+    
     private Stage dialog;
     
     private Connection con = null;
@@ -39,9 +42,19 @@ public class Okno_Zadanie {
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
     
-
+    private boolean okClicked = false;
+    
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    
     public void setDialog(Stage dialog) {
         this.dialog = dialog;
+    }
+    
+    private Zadanie zadanie;
+    public void setZadanie(Zadanie zadanie) {
+        this.zadanie=zadanie;
     }
     
     private IPZ controller;
@@ -68,9 +81,15 @@ public class Okno_Zadanie {
         {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
-            st.executeUpdate("INSERT INTO `zadanie`(`nazwa`, `czas`, `opis`) VALUES (\""+nazwa.getText()+"\",\""+czas.getText()+"\",\""+opis.getText()+"\")");
+            st.executeUpdate("INSERT INTO `zadanie`(`nazwa`, `czas`, `opis`, `opis_dlugi`) VALUES (\""+nazwa.getText()+"\",\""+czas.getText()+"\",\""+opis.getText()+"\",\""+opisD.getText()+"\")");
             st.executeUpdate("SET @id_zadanie = LAST_INSERT_ID()");
-            st.executeUpdate("INSERT INTO `zadanie_to_projekt` (`id_projekt`, `id_zadanie`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getnazwaProjekt()+"\"),@id_zadanie)");
+            st.executeUpdate("INSERT INTO `zadanie_to_projekt` (`id_projekt`, `id_zadanie`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getNazwaProjekt()+"\"),@id_zadanie)");
+            zadanie.setNazwa(nazwa.getText());
+            zadanie.setCzas(czas.getText()+" h");
+            zadanie.setOpis(opis.getText());
+            zadanie.setOpisD(opisD.getText());
+            zadanie.setStan("Do wykonania");
+            okClicked = true;
             dialog.close();
         }
     }
@@ -78,6 +97,5 @@ public class Okno_Zadanie {
     @FXML
     private void anuluj(ActionEvent event) {
         dialog.close();
-    }
-    
+    } 
 }

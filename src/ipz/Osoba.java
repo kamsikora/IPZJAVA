@@ -21,6 +21,10 @@ public class Osoba {
     private final StringProperty haslo;
     private final StringProperty stanowisko;
     
+    public Osoba() {
+        this(null, null, null, null, null, null, null);
+    }
+    
     public Osoba(String imie, String nazwisko, String email, String ranga, String login, String haslo, String stanowisko) {
         this.imie = new SimpleStringProperty(imie);
         this.nazwisko = new SimpleStringProperty(nazwisko);
@@ -64,13 +68,19 @@ public class Osoba {
      public String getHaslo() {
         return haslo.get();
     }
-//    public void setLastName(String fName) {
-//        nazwisko.set(fName);
-//    }
-//    public void setFirstName(String fName) {
-//        imie.set(fName);
-//    }
-//    public void setEmail(String fName) {
-//        email.set(fName);
-//    }    
+    public void setLogin(String login) {
+        this.login.set(login);
+    } 
+    public void setImie(String imie) {
+        this.imie.set(imie);
+    }
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko.set(nazwisko);
+    }  
+    public void setEmail(String email) {
+        this.email.set(email);
+    } 
+    public void setRanga(String ranga) {
+        this.ranga.set(ranga);
+    } 
 }

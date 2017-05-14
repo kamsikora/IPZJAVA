@@ -14,23 +14,36 @@ import javafx.beans.property.StringProperty;
  */
 public class Sprint {
     
-    private final StringProperty Nazwa;
-    private final StringProperty Data_rozpoczecia;
-    private final StringProperty Data_zakonczenia;
+    private final StringProperty nazwa;
+    private final StringProperty data_rozpoczecia;
+    private final StringProperty data_zakonczenia;
+    
+    public Sprint() {
+        this(null, null, null);
+    }
 
-    public Sprint(String Nazwa, String Data_rozpoczecia, String Data_zakonczenia) {
-        this.Nazwa = new SimpleStringProperty(Nazwa);
-        this.Data_rozpoczecia = new SimpleStringProperty(Data_rozpoczecia);
-        this.Data_zakonczenia = new SimpleStringProperty(Data_zakonczenia);
+    public Sprint(String nazwa, String data_rozpoczecia, String data_zakonczenia) {
+        this.nazwa = new SimpleStringProperty(nazwa);
+        this.data_rozpoczecia = new SimpleStringProperty(data_rozpoczecia);
+        this.data_zakonczenia = new SimpleStringProperty(data_zakonczenia);
     }
  
     public StringProperty NazwaProperty() {
-        return Nazwa;
+        return nazwa;
     }
     public StringProperty Data_rozpoczeciaProperty() {
-        return Data_rozpoczecia;
+        return data_rozpoczecia;
     }
     public StringProperty Data_zakonczeniaProperty() {
-        return Data_zakonczenia;
+        return data_zakonczenia;
+    }
+    public void setNazwa(String nazwa) {
+        this.nazwa.set(nazwa);
+    }
+    public void setData_rozpoczecia(String data_rozpoczecia) {
+        this.data_rozpoczecia.set(data_rozpoczecia);
+    }
+    public void setData_zakonczenia(String data_zakonczenia) {
+        this.data_zakonczenia.set(data_zakonczenia);
     }
 }

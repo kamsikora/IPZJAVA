@@ -46,10 +46,21 @@ public class Rejestracja {
     private PasswordField haslo;
     @FXML
     private PasswordField haslo2;
+    @FXML
+    private ComboBox<String> rola;
     
     private Stage dialog;
     
-    private String rolaUzytkownika;
+    private boolean okClicked = false;
+    
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    
+    private Osoba osoba;
+    public void setOsoba(Osoba osoba) {
+        this.osoba=osoba;
+    }
     
     private Connection con = null;
     private Statement st = null;
@@ -58,8 +69,6 @@ public class Rejestracja {
     private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
-    @FXML
-    private ComboBox<String> rola;
     
     public void setDialog(Stage dialog) throws SQLException {
         this.dialog = dialog;
@@ -105,7 +114,13 @@ public class Rejestracja {
                         String str = String.format("%032x", new BigInteger(1, md5.digest()));
                         con = DriverManager.getConnection(url, user, password);
                         st = con.createStatement();
-                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`, `id_rola`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\",(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\"))");
+                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`, `id_rola`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\",(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\"))");
+                        osoba.setImie(imie.getText());
+                        osoba.setNazwisko(nazwisko.getText());
+                        osoba.setLogin(login.getText());
+                        osoba.setEmail(email.getText());
+                        osoba.setRanga(rola.getValue());
+                        okClicked = true;
                         dialog.close();
                     }
                 }
@@ -175,7 +190,6 @@ public class Rejestracja {
         rola.valueProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue ov, String oldValue, String newValue)  {
-            rolaUzytkownika=newValue;
         }
         });
     } 

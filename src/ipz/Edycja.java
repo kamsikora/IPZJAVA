@@ -33,14 +33,6 @@ import javafx.util.Callback;
  */
 public class Edycja {
 
-    private Connection con = null;
-    private Statement st = null;
-    private ResultSet rs = null;
-
-    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
-    private final String user = "ipzuser";
-    private final String password = "ipzpassword";
-    
     @FXML
     private TextField imie;
     @FXML
@@ -55,8 +47,18 @@ public class Edycja {
     private ComboBox<String> rola;
 
     private Stage dialog;
+    
     private Osoba osoba;
-    public void setPerson(Osoba osoba) throws NoSuchAlgorithmException {
+    
+    private Connection con = null;
+    private Statement st = null;
+    private ResultSet rs = null;
+
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
+     
+    public void setOsoba(Osoba osoba) throws NoSuchAlgorithmException {
         this.osoba = osoba;
         imie.setText(osoba.getImie());
         nazwisko.setText(osoba.getNazwisko());
@@ -64,6 +66,7 @@ public class Edycja {
         login.setText(osoba.getLogin());
         rola.setValue(osoba.getRanga());
     }
+    
     public void setDialog(Stage dialog) throws SQLException {
         this.dialog = dialog;
         con = DriverManager.getConnection(url, user, password);
@@ -73,7 +76,7 @@ public class Edycja {
            rola.getItems().addAll(rs.getString("nazwa"));
         }
     }
-    private String rolaUzytkownika;
+    
     public void initialize() {
         rola.getSelectionModel().selectFirst();
         rola.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -113,7 +116,6 @@ public class Edycja {
         rola.valueProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue ov, String oldValue, String newValue)  {
-            rolaUzytkownika=newValue;
         }
         });
     }    
@@ -152,7 +154,12 @@ public class Edycja {
                         {
                             con = DriverManager.getConnection(url, user, password);
                             st = con.createStatement();
-                            st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+osoba.getHaslo()+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                            st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+osoba.getHaslo()+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                            osoba.setImie(imie.getText());
+                            osoba.setNazwisko(nazwisko.getText());
+                            osoba.setLogin(login.getText());
+                            osoba.setEmail(email.getText());
+                            osoba.setRanga(rola.getValue());
                             dialog.close(); 
                         }
                         else
@@ -162,7 +169,12 @@ public class Edycja {
                             String str = String.format("%032x", new BigInteger(1, md5.digest()));
                             con = DriverManager.getConnection(url, user, password);
                             st = con.createStatement();
-                            st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+str+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                            st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+str+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                            osoba.setImie(imie.getText());
+                            osoba.setNazwisko(nazwisko.getText());
+                            osoba.setLogin(login.getText());
+                            osoba.setEmail(email.getText());
+                            osoba.setRanga(rola.getValue());
                             dialog.close();
                         }       
                     }
@@ -173,7 +185,12 @@ public class Edycja {
                     {
                         con = DriverManager.getConnection(url, user, password);
                         st = con.createStatement();
-                        st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+osoba.getHaslo()+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                        st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+osoba.getHaslo()+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                        osoba.setImie(imie.getText());
+                        osoba.setNazwisko(nazwisko.getText());
+                        osoba.setLogin(login.getText());
+                        osoba.setEmail(email.getText());
+                        osoba.setRanga(rola.getValue());
                         dialog.close(); 
                     }
                     else
@@ -183,7 +200,12 @@ public class Edycja {
                         String str = String.format("%032x", new BigInteger(1, md5.digest()));
                         con = DriverManager.getConnection(url, user, password);
                         st = con.createStatement();
-                        st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+str+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rolaUzytkownika+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                        st.executeUpdate("UPDATE `uzytkownik` SET `imie`=\""+imie.getText()+"\", `nazwisko`=\""+nazwisko.getText()+"\", `login`=\""+login.getText()+"\", `email`=\""+email.getText()+"\", `haslo`=\""+str+"\", `id_rola`=(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\") WHERE `login`=\""+osoba.getLogin()+"\"");
+                        osoba.setImie(imie.getText());
+                        osoba.setNazwisko(nazwisko.getText());
+                        osoba.setLogin(login.getText());
+                        osoba.setEmail(email.getText());
+                        osoba.setRanga(rola.getValue());
                         dialog.close();
                     }  
                 }

@@ -17,19 +17,32 @@ public class Projekt {
     private final StringProperty data_rozpoczecia;
     private final StringProperty data_zakonczenia;
     
+    public Projekt() {
+        this(null, null, null);
+    }
+    
     public Projekt(String nazwa, String data_rozpoczecia, String data_zakonczenia) {
         this.nazwa = new SimpleStringProperty(nazwa);
         this.data_rozpoczecia = new SimpleStringProperty(data_rozpoczecia);
         this.data_zakonczenia = new SimpleStringProperty(data_zakonczenia);
     }
  
-    public String getnazwa() {
+    public String getNazwa() {
         return nazwa.get();
     }
-    public String getdata_rozpoczecia() {
+    public String getData_rozpoczecia() {
         return data_rozpoczecia.get();
     }
-    public String getdata_zakonczenia() {
+    public String getData_zakonczenia() {
         return data_zakonczenia.get();
+    }
+    public void setNazwa(String nazwa) {
+        this.nazwa.set(nazwa);
+    }
+    public void setData_rozpoczecia(String data_rozpoczecia) {
+        this.data_rozpoczecia.set(data_rozpoczecia);
+    }
+    public void setData_zakonczenia(String data_zakonczenia) {
+        this.data_zakonczenia.set(data_zakonczenia);
     }
 }
