@@ -44,7 +44,7 @@ public class FXMLDocumentController implements Initializable {
     private final String password = "ipzpassword";
     
     private IPZ podstawa;
-    public void Setglowny(IPZ podstawa) {
+    public void setGlowny(IPZ podstawa) {
         this.podstawa=podstawa;
         
     }
@@ -67,7 +67,6 @@ public class FXMLDocumentController implements Initializable {
             do {
                 if(str.equals(rs.getString(1)))
                 {
-                    System.out.println(podstawa.getStage().getWidth()+" "+podstawa.getStage().getHeight());
                     podstawa.setLogin(login.getText());
                     podstawa.Projekty_uzytkownicy();
                 }

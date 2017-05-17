@@ -25,6 +25,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -63,8 +64,6 @@ public class Okno {
     @FXML
     private Label projekt;
     @FXML
-    private TableColumn<Sprint, String> sprint;
-    @FXML
     private TableColumn<Sprint, String> dataroz;
     @FXML
     private TableColumn<Sprint, String> datazak;
@@ -76,6 +75,10 @@ public class Okno {
     private Button sprinton;
     @FXML
     private Button zadanieon;
+    @FXML
+    private TableColumn<Sprint, String> sprintS;
+    @FXML
+    private TableColumn<Zadanie, String> sprintZ;
    
     private IPZ podstawa;
            
@@ -96,7 +99,7 @@ public class Okno {
         }
     }
     
-    public void Setglowny(IPZ podstawa) throws SQLException {
+    public void setGlowny(IPZ podstawa) throws SQLException {
         this.podstawa=podstawa;
         lista.setItems(getProjektData());
         con = DriverManager.getConnection(url, user, password);
@@ -158,7 +161,8 @@ public class Okno {
             czas.setCellValueFactory(cellData -> cellData.getValue().CzasProperty());
             opis.setCellValueFactory(cellData -> cellData.getValue().OpisProperty());
             stan.setCellValueFactory(cellData -> cellData.getValue().StanProperty());
-            sprint.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
+            sprintS.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
+            sprintZ.setCellValueFactory(cellData -> cellData.getValue().SprintProperty());
             dataroz.setCellValueFactory(cellData -> cellData.getValue().Data_rozpoczeciaProperty());
             datazak.setCellValueFactory(cellData -> cellData.getValue().Data_zakonczeniaProperty());
             podstawa.setNazwaProjekt(newValue.getNazwa());
@@ -169,11 +173,10 @@ public class Okno {
                 while(rs.next()) { 
                     sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));   
                 }
-                rs = st.executeQuery("SELECT * FROM  `zadanie_to_projekt` INNER JOIN  `zadanie` ON  `zadanie_to_projekt`.`id_zadanie` =  `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN  `projekt` ON  `zadanie_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa`= \""+newValue.getNazwa()+"\"");
+                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
                 while(rs.next()) { 
-                    zadanieData.add(new Zadanie(rs.getString("nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa")));   
-                }
-                
+                    zadanieData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
+                } 
             } catch (SQLException ex) {
                 Logger.getLogger(Okno.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -185,7 +188,7 @@ public class Okno {
     }  
 
     @FXML
-    private void cofnij(ActionEvent event) throws Exception {
+    private void cofnij(ActionEvent event) throws Exception { 
         podstawa.Projekty_uzytkownicy();
     }
 
@@ -213,6 +216,14 @@ public class Okno {
         boolean okClicked = podstawa.showDialogZadanie(tempZadanie);
         if (okClicked) {
             getZadanieData().add(tempZadanie);
+        }
+    }
+
+    @FXML
+    private void zadaniatosprint(MouseEvent event) throws Exception {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
+            podstawa.setNazwaSprint(tabelaS.getSelectionModel().getSelectedItem().NazwaProperty().get());
+            podstawa.Zadania_sprinty();
         }
     }
 }

@@ -39,6 +39,13 @@ public class IPZ extends Application {
     public void setNazwaProjekt(String NazwaProjekt) {
         this.NazwaProjekt=NazwaProjekt; 
     }
+    private String NazwaSprint;
+    public String getNazwaSprint() {
+        return NazwaSprint;
+    } 
+    public void setNazwaSprint(String NazwaSprint) {
+        this.NazwaSprint=NazwaSprint; 
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,9 +54,9 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         FXMLDocumentController controller = loader.getController();
-        controller.Setglowny(this);
+        controller.setGlowny(this);
         
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 792, 473);
         stage.setScene(scene);
         stage.show();
     }
@@ -59,10 +66,10 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         Okno controller = loader.getController();
-        controller.Setglowny(this);
+        controller.setGlowny(this);
         
         stage.hide();
-        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
         stage.setScene(scene);
         stage.show();
     }
@@ -71,10 +78,10 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         Okno_osob_projekt controller = loader.getController();
-        controller.Setglowny(this);
+        controller.setGlowny(this);
         
         stage.hide();
-        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
         stage.setScene(scene);
         stage.show();
     }
@@ -84,10 +91,10 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         Okno_osob controller = loader.getController();
-        controller.Setglowny(this);
+        controller.setGlowny(this);
         
         stage.hide();
-        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
         stage.setScene(scene);
         stage.show();
     }
@@ -97,13 +104,27 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         Projekty_uzytkownicy controller = loader.getController();
-        controller.Setglowny(this);
+        controller.setGlowny(this);
         
         stage.hide();
-        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
         stage.setScene(scene);
         stage.show();
     }
+    
+    public void Zadania_sprinty() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Zadania_sprinty.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        Zadania_sprinty controller = loader.getController();
+        controller.setGlowny(this);
+        
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     public void showDialogEdycja(Osoba osoba) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Edycja.fxml"));
         loader.load();

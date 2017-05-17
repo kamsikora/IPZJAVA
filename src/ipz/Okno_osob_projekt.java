@@ -56,17 +56,17 @@ public class Okno_osob_projekt {
 
     private IPZ podstawa;
     
-    private final ObservableList<Osoba> personDataW = FXCollections.observableArrayList();
-    public ObservableList<Osoba> getPersonDataW() {
-        return personDataW;
+    private final ObservableList<Osoba> osobaDataW = FXCollections.observableArrayList();
+    public ObservableList<Osoba> getOsobaDataW() {
+        return osobaDataW;
     }
-    private final ObservableList<Osoba> personDataP = FXCollections.observableArrayList();
-    public ObservableList<Osoba> getPersonDataP() {
-        return personDataP;
+    private final ObservableList<Osoba> osobaDataP = FXCollections.observableArrayList();
+    public ObservableList<Osoba> getOsobaDataP() {
+        return osobaDataP;
     }
-    private final ObservableList<Osoba> personDataW2 = FXCollections.observableArrayList();
-    public ObservableList<Osoba> getPersonDataW2() {
-        return personDataW2;
+    private final ObservableList<Osoba> osobaDataW2 = FXCollections.observableArrayList();
+    public ObservableList<Osoba> getOsobaDataW2() {
+        return osobaDataW2;
     }
     private Connection con = null;
     private Statement st = null;
@@ -80,30 +80,31 @@ public class Okno_osob_projekt {
        
     }
         
-    public void Setglowny(IPZ podstawa) throws SQLException {
+    public void setGlowny(IPZ podstawa) throws SQLException {
         this.podstawa=podstawa;   
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getNazwaProjekt()+"\"");
         while(rs.next()) { 
-            personDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"))); 
+            osobaDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"))); 
         }
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            personDataW.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),""));
+            osobaDataW.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),""));
         }  
-        personDataW2.addAll(personDataW);
-        for(Osoba tabP : personDataP) {
-            for(Osoba tabW : personDataW) {
+        osobaDataW2.addAll(osobaDataW);
+        for(Osoba tabP : osobaDataP) {
+            for(Osoba tabW : osobaDataW) {
                 if(tabW.getLogin().equals(tabP.getLogin()))
                 {
-                    personDataW2.remove(tabW);
+                    getOsobaDataW2().remove(tabW);
                 }
             }    
         }
-        tabelaW.setItems(getPersonDataW2());
-        tabelaP.setItems(getPersonDataP());
-    }     
+        tabelaW.setItems(getOsobaDataW2());
+        tabelaP.setItems(getOsobaDataP());
+    }    
+    
     public void initialize() {
         imieW.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
         nazwiskoW.setCellValueFactory(cellData -> cellData.getValue().nazwiskoProperty());
@@ -116,15 +117,19 @@ public class Okno_osob_projekt {
     private Osoba osoba;
     @FXML
     private void usuwanie(MouseEvent event) {
-        usun.setDisable(false);
         dodaj.setDisable(true);
+        if(!tabelaP.getItems().isEmpty()) {
+            usun.setDisable(false);
+        }
         osoba = tabelaP.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     private void dodawanie(MouseEvent event) {
-        dodaj.setDisable(false);
         usun.setDisable(true);
+        if(!tabelaW.getItems().isEmpty()) {
+            dodaj.setDisable(false);
+        }
         osoba = tabelaW.getSelectionModel().getSelectedItem();
     }
 
@@ -148,8 +153,10 @@ public class Okno_osob_projekt {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
             st.executeUpdate("INSERT INTO `uzytkownik_to_projekt`(`id_projekt`, `id_uzytkownik`, `id_stanowisko`) VALUES ((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+podstawa.getNazwaProjekt()+"\"),(SELECT `id` FROM  `uzytkownik` WHERE  `login` = \""+osoba.getLogin()+"\"),(SELECT `id` FROM  `stanowisko` WHERE  `nazwa` = \""+result.get()+"\"))");
-        }    
-    podstawa.Okno_osob_projekt();        
+            osoba.setStanowisko(result.get());
+            getOsobaDataP().add(osoba);
+            getOsobaDataW2().remove(osoba); 
+        }           
     }
 
     @FXML
@@ -164,13 +171,16 @@ public class Okno_osob_projekt {
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
+            con = DriverManager.getConnection(url, user, password);
+            st = con.createStatement();
             st.executeUpdate("DELETE FROM `uzytkownik_to_projekt` WHERE `id_uzytkownik` = (SELECT `id` FROM  `uzytkownik` WHERE  `login` = \""+osoba.getLogin()+"\")"); 
+            getOsobaDataP().remove(osoba);
+            getOsobaDataW2().add(osoba);
         } 
         else 
         {
             alert.close();
         }  
-        podstawa.Okno_osob_projekt();
     }
 
     @FXML

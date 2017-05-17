@@ -77,14 +77,28 @@ public class Okno_Sprintu {
         {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
-            st.executeUpdate("INSERT INTO `sprint`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
-            st.executeUpdate("SET @id_sprint = LAST_INSERT_ID()");
-            st.executeUpdate("INSERT INTO `sprint_to_projekt` (`id_projekt`, `id_sprint`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getNazwaProjekt()+"\"),@id_sprint)");
-            sprint.setNazwa(nazwa.getText());
-            sprint.setData_rozpoczecia(start.getValue().toString());
-            sprint.setData_zakonczenia(koniec.getValue().toString());
-            okClicked = true;
-            dialog.close();
+            rs = st.executeQuery("SELECT * FROM `sprint_to_projekt` INNER JOIN `projekt` ON `sprint_to_projekt`.`id_projekt` = `projekt`.`id` AND `projekt`.`nazwa` = \""+controller.getNazwaProjekt()+"\" INNER JOIN `sprint` ON `sprint_to_projekt`.`id_sprint` = `sprint`.`id` WHERE  `sprint`.`nazwa` = \""+nazwa.getText()+"\"");
+            if(rs.absolute(1)) { 
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(dialog);
+                alert.setTitle("Nazwa sprintu");
+                alert.setHeaderText("Sprint o podanej nazwie jest już w projekcie.");
+                alert.setContentText("Proszę podać inną nazwę sprintu");
+                alert.showAndWait();
+            }
+            else 
+            {
+               con = DriverManager.getConnection(url, user, password);
+                st = con.createStatement();
+                st.executeUpdate("INSERT INTO `sprint`(`nazwa`, `data_rozpoczecia`, `data_zakonczenia`) VALUES (\""+nazwa.getText()+"\",\""+start.getValue()+"\",\""+koniec.getValue()+"\")");
+                st.executeUpdate("SET @id_sprint = LAST_INSERT_ID()");
+                st.executeUpdate("INSERT INTO `sprint_to_projekt` (`id_projekt`, `id_sprint`) VALUES((SELECT `id` FROM  `projekt` WHERE  `nazwa` = \""+controller.getNazwaProjekt()+"\"),@id_sprint)");
+                sprint.setNazwa(nazwa.getText());
+                sprint.setData_rozpoczecia(start.getValue().toString());
+                sprint.setData_zakonczenia(koniec.getValue().toString());
+                okClicked = true;
+                dialog.close(); 
+            }
         }
     }
 

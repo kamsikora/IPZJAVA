@@ -83,4 +83,7 @@ public class Osoba {
     public void setRanga(String ranga) {
         this.ranga.set(ranga);
     } 
+    public void setStanowisko(String stanowisko) {
+        this.stanowisko.set(stanowisko);
+    }
 }

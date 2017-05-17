@@ -21,9 +21,9 @@
       <Label fx:id="projekt" style="-fx-background-color: white;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
       <HBox layoutX="283.0" layoutY="-23.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="70.0">
          <children>
-            <TableView fx:id="tabelaS" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
+            <TableView fx:id="tabelaS" onMousePressed="#zadaniatosprint" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="sprint" text="Sprinty" />
+                <TableColumn fx:id="sprintS" text="Sprinty" />
                   <TableColumn fx:id="dataroz" text="Data rozpoczecia" />
                   <TableColumn fx:id="datazak" text="Data zakończenia" />
               </columns>
@@ -35,6 +35,7 @@
               <columns>
                 <TableColumn fx:id="zadanie" text="Zadanie" />
                 <TableColumn fx:id="czas" text="Czas (h)" />
+                  <TableColumn fx:id="sprintZ" text="Sprint" />
                   <TableColumn fx:id="opis" text="Opis" />
                   <TableColumn fx:id="stan" text="Stan" />
               </columns>

@@ -52,7 +52,7 @@ public class Okno_osob {
         }
     }
     
-    public void Setglowny(IPZ podstawa) {
+    public void setGlowny(IPZ podstawa) {
         this.podstawa=podstawa;
         tabela.setItems(getOsobaData());
     }

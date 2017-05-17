@@ -35,7 +35,7 @@ public class Projekty_uzytkownicy {
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
     
-    public void Setglowny(IPZ podstawa) throws SQLException {
+    public void setGlowny(IPZ podstawa) throws SQLException {
         this.podstawa=podstawa;
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
@@ -59,7 +59,6 @@ public class Projekty_uzytkownicy {
 
     @FXML
     private void wyjscie(ActionEvent event) {
-        System.out.println(podstawa.getStage().getWidth()+" "+podstawa.getStage().getHeight());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Zamykanie aplikacji");
         alert.setHeaderText("Czy chcesz wyłączyć program?");
@@ -79,5 +78,4 @@ public class Projekty_uzytkownicy {
             alert.close();
         }
     }
-    
 }
