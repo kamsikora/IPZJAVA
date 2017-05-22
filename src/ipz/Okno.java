@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -41,6 +42,18 @@ public class Okno {
     private final ObservableList<Sprint> sprintData = FXCollections.observableArrayList();
     public ObservableList<Sprint> getSprintData() {
         return sprintData;
+    }
+    private final ObservableList<Zadanie> zadanieZaData = FXCollections.observableArrayList();
+    public ObservableList<Zadanie> getZadanieZaData() {
+        return zadanieZaData;
+    }
+    private final ObservableList<Zadanie> zadanieDwData = FXCollections.observableArrayList();
+    public ObservableList<Zadanie> getZadanieDwData() {
+        return zadanieDwData;
+    }
+    private final ObservableList<Zadanie> zadanieWtData = FXCollections.observableArrayList();
+    public ObservableList<Zadanie> getZadanieWtData() {
+        return zadanieWtData;
     }
     private final ObservableList<Zadanie> zadanieData = FXCollections.observableArrayList();
     public ObservableList<Zadanie> getZadanieData() {
@@ -79,7 +92,13 @@ public class Okno {
     private TableColumn<Sprint, String> sprintS;
     @FXML
     private TableColumn<Zadanie, String> sprintZ;
-   
+    @FXML
+    private CheckBox stan1;
+    @FXML
+    private CheckBox stan2;
+    @FXML
+    private CheckBox stan3;
+    
     private IPZ podstawa;
            
     private Connection con = null;
@@ -155,6 +174,9 @@ public class Okno {
         public void changed(ObservableValue ov, Projekt oldValue, Projekt newValue)  {
             sprintData.removeAll(sprintData);
             zadanieData.removeAll(zadanieData);
+            zadanieDwData.removeAll(zadanieDwData);
+            zadanieZaData.removeAll(zadanieZaData);
+            zadanieWtData.removeAll(zadanieWtData);
             tabelaS.setItems(getSprintData());
             tabelaZ.setItems(getZadanieData());
             zadanie.setCellValueFactory(cellData -> cellData.getValue().NazwaProperty());
@@ -173,16 +195,37 @@ public class Okno {
                 while(rs.next()) { 
                     sprintData.add(new Sprint(rs.getString("nazwa"),rs.getString("data_rozpoczecia"),rs.getString("data_zakonczenia")));   
                 }
-                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
+                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` AND `stan`.`nazwa` = \""+stan3.getText()+"\" INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
                 while(rs.next()) { 
-                    zadanieData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
+                    zadanieZaData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
                 } 
+                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` AND `stan`.`nazwa` = \""+stan2.getText()+"\" INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
+                while(rs.next()) { 
+                    zadanieWtData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
+                } 
+                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` AND `stan`.`nazwa` = \""+stan1.getText()+"\" INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
+                while(rs.next()) { 
+                    zadanieDwData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
+                } 
+//                rs = st.executeQuery("SELECT * FROM `zadanie_to_projekt` LEFT OUTER JOIN `zadanie_to_sprint` ON `zadanie_to_projekt`.`id_zadanie`= `zadanie_to_sprint`.`id_zadanie` LEFT OUTER JOIN `sprint` ON `zadanie_to_sprint`.`id_sprint` = `sprint`.`id` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` INNER JOIN `stan` ON `zadanie`.`id_stan` = `stan`.`id` INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` = \""+newValue.getNazwa()+"\"");
+//                while(rs.next()) { 
+//                    zadanieData.add(new Zadanie(rs.getString("zadanie.nazwa"),rs.getString("czas")+" h",rs.getString("opis"),rs.getString("opis_dlugi"),rs.getString("stan.nazwa"),rs.getString("sprint.nazwa")));   
+//                }
             } catch (SQLException ex) {
                 Logger.getLogger(Okno.class.getName()).log(Level.SEVERE, null, ex);
             }
+            zadanieData.addAll(zadanieDwData);
+            zadanieData.addAll(zadanieZaData);
+            zadanieData.addAll(zadanieWtData);
             sprinton.setDisable(false);
             zadanieon.setDisable(false);
             pokaz.setDisable(false);
+            stan1.setDisable(false);
+            stan2.setDisable(false);
+            stan3.setDisable(false);
+            stan1.setSelected(true);
+            stan2.setSelected(true);
+            stan3.setSelected(true);
         }
         });
     }  
@@ -232,5 +275,57 @@ public class Okno {
         if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
             podstawa.ZadanietoZadanie();
         }
+    }
+    
+    @FXML
+    private void stany(ActionEvent event) {
+        if(stan1.isSelected() && stan2.isSelected() && stan3.isSelected()) {
+            getZadanieData().removeAll(getZadanieDwData());
+            getZadanieData().removeAll(getZadanieWtData());
+            getZadanieData().removeAll(getZadanieZaData());
+            getZadanieData().addAll(getZadanieDwData());
+            getZadanieData().addAll(getZadanieWtData());
+            getZadanieData().addAll(getZadanieZaData());
+        }
+        else if(stan1.isSelected() && stan2.isSelected()) {
+            getZadanieData().removeAll(getZadanieDwData());
+            getZadanieData().removeAll(getZadanieWtData());
+            getZadanieData().addAll(getZadanieDwData());
+            getZadanieData().addAll(getZadanieWtData());
+        }
+        else if(stan2.isSelected() && stan3.isSelected()) {
+            getZadanieData().removeAll(getZadanieWtData());
+            getZadanieData().removeAll(getZadanieZaData());
+            getZadanieData().addAll(getZadanieZaData());
+            getZadanieData().addAll(getZadanieWtData());
+        }
+        else if(stan1.isSelected() && stan3.isSelected()) {
+            getZadanieData().removeAll(getZadanieDwData());
+            getZadanieData().removeAll(getZadanieZaData());
+            getZadanieData().addAll(getZadanieDwData());
+            getZadanieData().addAll(getZadanieZaData());
+        }
+        else if(stan1.isSelected()) {
+            getZadanieData().removeAll(getZadanieDwData());
+            getZadanieData().addAll(getZadanieDwData());
+        }
+        else if(stan2.isSelected()) {
+            getZadanieData().removeAll(getZadanieWtData());
+            getZadanieData().addAll(getZadanieWtData());
+        }
+        else if(stan3.isSelected()) {
+            getZadanieData().removeAll(getZadanieZaData());
+            getZadanieData().addAll(getZadanieZaData());
+        }
+        
+        if(!stan1.isSelected()) {
+            getZadanieData().removeAll(getZadanieDwData());
+        } 
+        if(!stan2.isSelected()) {
+            getZadanieData().removeAll(getZadanieWtData());
+        }
+        if(!stan3.isSelected()) {
+            getZadanieData().removeAll(getZadanieZaData());
+        } 
     }
 }

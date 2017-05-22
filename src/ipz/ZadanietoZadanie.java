@@ -23,9 +23,9 @@ public class ZadanietoZadanie implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    void setGlowny(IPZ aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+    private IPZ podstawa;
+    public void setGlowny(IPZ podstawa) {
+        this.podstawa=podstawa;
+    }
 }

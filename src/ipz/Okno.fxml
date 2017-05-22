@@ -45,5 +45,13 @@
             </TableView>
          </children>
       </HBox>
+      <HBox layoutX="10.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <Label text="Stan zadań" />
+            <CheckBox fx:id="stan1" disable="true" mnemonicParsing="false" onAction="#stany" selected="true" text="Do wykonania" />
+            <CheckBox fx:id="stan2" disable="true" mnemonicParsing="false" onAction="#stany" selected="true" text="W trakcie" />
+            <CheckBox fx:id="stan3" disable="true" mnemonicParsing="false" onAction="#stany" selected="true" text="Zakończone" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
