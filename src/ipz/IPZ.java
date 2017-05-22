@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -55,6 +56,8 @@ public class IPZ extends Application {
         Parent root = loader.getRoot();
         FXMLDocumentController controller = loader.getController();
         controller.setGlowny(this);
+        stage.getIcons().add(new Image("/ipz/Icon.png"));
+        stage.setTitle("DiT Version: 0.3");
         
         Scene scene = new Scene(root, 792, 473);
         stage.setScene(scene);
@@ -117,6 +120,19 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         Zadania_sprinty controller = loader.getController();
+        controller.setGlowny(this);
+        
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void ZadanietoZadanie() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ZadanietoZadanie.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        ZadanietoZadanie controller = loader.getController();
         controller.setGlowny(this);
         
         stage.hide();

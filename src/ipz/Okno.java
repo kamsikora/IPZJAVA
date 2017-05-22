@@ -226,4 +226,11 @@ public class Okno {
             podstawa.Zadania_sprinty();
         }
     }
+    
+    @FXML
+    private void zadanietozadanie(MouseEvent event) throws Exception {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
+            podstawa.ZadanietoZadanie();
+        }
+    }
 }

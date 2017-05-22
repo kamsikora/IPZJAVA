@@ -31,7 +31,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="tabelaZ" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
+            <TableView fx:id="tabelaZ" onMousePressed="#zadanietozadanie" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="zadanie" text="Zadanie" />
                 <TableColumn fx:id="czas" text="Czas (h)" />
