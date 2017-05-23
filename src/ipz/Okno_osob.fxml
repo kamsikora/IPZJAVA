@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.media.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
+<AnchorPane id="tlo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob">
    <children>
-      <TableView fx:id="tabela" onMouseClicked="#usuwanie" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="5.0">
+      <TableView fx:id="tabela" onMouseClicked="#usuwanie" prefHeight="490.0" prefWidth="640.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="5.0">
         <columns>
           <TableColumn fx:id="imie" text="Imię" />
           <TableColumn fx:id="nazwisko" text="Nazwisko" />
@@ -20,9 +22,39 @@
       </TableView>
       <VBox AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#dodaj" prefWidth="120.0" text="Dodaj użytkownika" />
-            <Button fx:id="edycja" disable="true" mnemonicParsing="false" onAction="#edytuj" prefWidth="120.0" text="Edytuj użytkownika" />
-            <Button fx:id="usun" disable="true" mnemonicParsing="false" onAction="#usun" prefWidth="120.0" text="Usuń użytkownika" />
+            <Button id="glass-grey" mnemonicParsing="false" onAction="#dodaj" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Dodaj użytkownika">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/add-user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
+            <Button id="glass-grey" fx:id="edycja" disable="true" mnemonicParsing="false" onAction="#edytuj" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Edytuj użytkownika">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/user_edit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
+            <Button id="glass-grey" fx:id="usun" disable="true" mnemonicParsing="false" onAction="#usun" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Usuń użytkownika">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/user_remove.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="11.0" />
+               </font></Button>
          </children>
       </VBox>
       <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />

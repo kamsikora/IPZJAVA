@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Edycja">
+<AnchorPane id="tlo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Edycja">
    <children>
       <GridPane layoutX="25.0" layoutY="21.0">
          <children>
@@ -33,12 +33,12 @@
                   <Tooltip text="Twoje hasło (minimum 6 znaków)" />
                </tooltip>
             </PasswordField>
-            <Label text="Imię" />
-            <Label text="Nazwisko" GridPane.rowIndex="1" />
-            <Label text="Login" GridPane.rowIndex="2" />
-            <Label text="E-mail" GridPane.rowIndex="3" />
-            <Label text="Hasło" GridPane.rowIndex="4" />
-            <Label text="Rola" GridPane.rowIndex="5" />
+            <Label text="Imię" textFill="WHITE" />
+            <Label text="Nazwisko" textFill="WHITE" GridPane.rowIndex="1" />
+            <Label text="Login" textFill="WHITE" GridPane.rowIndex="2" />
+            <Label text="E-mail" textFill="WHITE" GridPane.rowIndex="3" />
+            <Label text="Hasło" textFill="WHITE" GridPane.rowIndex="4" />
+            <Label text="Rola" textFill="WHITE" GridPane.rowIndex="5" />
             <ComboBox fx:id="rola" prefWidth="150.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <columnConstraints>

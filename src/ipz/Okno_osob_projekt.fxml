@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob_projekt">
+<AnchorPane id="tlo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_osob_projekt">
    <children>
       <VBox AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -33,12 +37,32 @@
             </TableView>
          </children>
       </VBox>
-      <VBox AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Button fx:id="dodaj" disable="true" mnemonicParsing="false" onAction="#dodaj" prefWidth="120.0" text="Dodaj użytkownika do projektu" wrapText="true" />
-            <Button fx:id="usun" disable="true" mnemonicParsing="false" onAction="#usun" prefWidth="120.0" text="Usuń użytkownika z projektu" wrapText="true" />
-         </children>
-      </VBox>
+      <VBox AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <Button layoutX="548.0" layoutY="374.0" mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <Button id="glass-grey" fx:id="usun" disable="true" layoutX="670.0" layoutY="79.0" mnemonicParsing="false" onAction="#usun" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Usuń użytkownika z projektu" wrapText="true" AnchorPane.rightAnchor="10.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Grafika/user_remove.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font></Button>
+      <Button id="glass-grey" fx:id="dodaj" disable="true" layoutX="670.0" layoutY="29.0" mnemonicParsing="false" onAction="#dodaj" prefHeight="42.0" prefWidth="140.0" stylesheets="@style.css" text="Dodaj użytkownika do projektu" wrapText="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="29.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Grafika/add-user.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font></Button>
    </children>
 </AnchorPane>

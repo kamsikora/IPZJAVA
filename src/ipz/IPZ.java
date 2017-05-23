@@ -56,7 +56,7 @@ public class IPZ extends Application {
         Parent root = loader.getRoot();
         FXMLDocumentController controller = loader.getController();
         controller.setGlowny(this);
-        stage.getIcons().add(new Image("/ipz/Icon.png"));
+        stage.getIcons().add(new Image("/ipz/DiT.png"));
         stage.setTitle("DiT Version: 0.3");
         
         Scene scene = new Scene(root, 792, 473);

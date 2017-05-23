@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_Zadanie">
+<AnchorPane id="tlo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_Zadanie">
    <children>
       <GridPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
@@ -22,9 +22,9 @@
                <tooltip>
                   <Tooltip text="Podaj nazwę zadania" />
                </tooltip></TextField>
-            <Label text="Nazwa Zadania" />
-            <Label text="Czas (h)" GridPane.rowIndex="1" />
-            <Label text="Opis" GridPane.rowIndex="2" />
+            <Label text="Nazwa Zadania" textFill="WHITE" />
+            <Label text="Czas (h)" textFill="WHITE" GridPane.rowIndex="1" />
+            <Label text="Opis" textFill="WHITE" GridPane.rowIndex="2" />
             <TextField fx:id="czas" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Podaj czas zadania" />
@@ -35,7 +35,7 @@
                   <Tooltip text="Podaj opis zadania" />
                </tooltip>
             </TextField>
-            <Label text="Opis długi" GridPane.rowIndex="3" />
+            <Label text="Opis długi" textFill="WHITE" GridPane.rowIndex="3" />
             <TextArea fx:id="opisD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>

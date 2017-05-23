@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_Sprintu">
+<AnchorPane id="tlo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno_Sprintu">
    <children>
       <GridPane layoutX="25.0" layoutY="21.0">
         <columnConstraints>
@@ -21,14 +21,14 @@
                <tooltip>
                   <Tooltip text="Podaj nazwę sprintu" />
                </tooltip></TextField>
-            <Label text="Nazwa Sprintu" />
-            <Label text="Start" GridPane.rowIndex="1" />
+            <Label text="Nazwa Sprintu" textFill="WHITE" />
+            <Label text="Start" textFill="WHITE" GridPane.rowIndex="1" />
             <DatePicker fx:id="start" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Podaj datę początku sprintu" />
                </tooltip>
             </DatePicker>
-            <Label text="Koniec" GridPane.rowIndex="2" />
+            <Label text="Koniec" textFill="WHITE" GridPane.rowIndex="2" />
             <DatePicker fx:id="koniec" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <tooltip>
                   <Tooltip text="Podaj datę końca sprintu" />

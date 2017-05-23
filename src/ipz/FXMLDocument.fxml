@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.FXMLDocumentController">
+<BorderPane id="logowanie" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.FXMLDocumentController">
    <bottom>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -23,11 +23,11 @@
             <PasswordField fx:id="haslo" onAction="#logowanie" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Login">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></Label>
             <Label text="Hasło" GridPane.rowIndex="1">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></Label>
          </children>
          <columnConstraints>
@@ -44,9 +44,9 @@
       </GridPane>
    </center>
    <top>
-      <Label text="Proszę podać login i hasło" BorderPane.alignment="CENTER">
+      <Label text="Logowanie" BorderPane.alignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
    </top>

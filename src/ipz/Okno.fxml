@@ -1,24 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
+<AnchorPane id="tlo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
       <Button mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-      <Label fx:id="info" style="-fx-background-color: white;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="info" style="-fx-background-color: 00FF00;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <VBox layoutY="88.0" prefHeight="154.0" prefWidth="150.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="88.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#dodaj_P" prefHeight="44.0" prefWidth="150.0" text="Dodaj projekt" />
-            <Button fx:id="sprinton" disable="true" mnemonicParsing="false" onAction="#dodaj_S" prefHeight="44.0" prefWidth="150.0" text="Dodaj sprint " />
-            <Button fx:id="zadanieon" disable="true" mnemonicParsing="false" onAction="#dodaj_Z" prefHeight="44.0" prefWidth="150.0" text="Dodaj zadanie " />
-            <Button fx:id="pokaz" disable="true" mnemonicParsing="false" onAction="#pokaz" prefHeight="49.0" prefWidth="150.0" text="Pokaż użytkowników w projekcie" wrapText="true" />
+            <Button id="glass-grey" mnemonicParsing="false" onAction="#dodaj_P" prefHeight="44.0" prefWidth="150.0" stylesheets="@style.css" text="Dodaj projekt  ">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/dodaj1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button id="glass-grey" fx:id="sprinton" disable="true" mnemonicParsing="false" onAction="#dodaj_S" prefHeight="44.0" prefWidth="150.0" stylesheets="@style.css" text="Dodaj sprint    ">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/dodaj1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button id="glass-grey" fx:id="zadanieon" disable="true" mnemonicParsing="false" onAction="#dodaj_Z" prefHeight="44.0" prefWidth="150.0" stylesheets="@style.css" text="Dodaj zadanie ">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/dodaj1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button id="glass-grey" fx:id="pokaz" disable="true" mnemonicParsing="false" onAction="#pokaz" prefHeight="49.0" prefWidth="150.0" stylesheets="@style.css" text="Pokaż użytkowników w projekcie" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Grafika/pokaz.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font></Button>
          </children>
       </VBox>
       <ComboBox fx:id="lista" prefWidth="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <Label fx:id="projekt" style="-fx-background-color: white;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="projekt" style="-fx-background-color: 00FF00;" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
       <HBox layoutX="283.0" layoutY="87.0" prefHeight="408.0" prefWidth="635.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="87.0">
          <children>
             <TableView fx:id="tabelaS" onMousePressed="#zadaniatosprint" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">
@@ -45,7 +89,7 @@
             </TableView>
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
+      <HBox layoutX="332.0" layoutY="57.0" spacing="5.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="57.0">
          <children>
             <Label text="Stan zadań" />
             <CheckBox fx:id="stan1" disable="true" mnemonicParsing="false" onAction="#stany" selected="true" text="Do wykonania" />
