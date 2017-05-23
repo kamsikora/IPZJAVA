@@ -47,6 +47,13 @@ public class IPZ extends Application {
     public void setNazwaSprint(String NazwaSprint) {
         this.NazwaSprint=NazwaSprint; 
     }
+    private String NazwaZadanie;
+    public String getNazwaZadanie() {
+        return NazwaZadanie;
+    } 
+    public void setNazwaZadanie(String NazwaZadanie) {
+        this.NazwaZadanie=NazwaZadanie; 
+    }
     
     @Override
     public void start(Stage stage) throws Exception {

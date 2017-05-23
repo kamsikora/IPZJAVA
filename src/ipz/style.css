@@ -3,15 +3,10 @@
 	-fx-background-size: stretch;
 }
 
-
-
 #tlo{
 	-fx-background-image: url("Grafika/tlotest.png");
 	-fx-background-size: stretch;
 }
-
-
-
 
 #dodajuzytkownikadoprojektu{
 	-fx-background-image: url("Grafika/dodajuzytkownikadoprojektu.png");
@@ -24,14 +19,11 @@
     -fx-background-color: rgba(135,186,215,0.7);
 }
 
-
-
-
 #usunzutkownikazprojektu{
 	-fx-background-image: url("Grafika/usunuzytkownikazprojektu.png");
 	-fx-background-size: stretch;
 }
-}
+
 #usunzutkownikazprojektu:hover{
     -fx-background-color: #3e8e41;
 }
@@ -64,7 +56,7 @@
 #dark-blue Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
-}
+
 #dark-blue:hover{
     -fx-background-color: #2b6f96;
 }

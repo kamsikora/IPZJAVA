@@ -273,6 +273,7 @@ public class Okno {
     @FXML
     private void zadanietozadanie(MouseEvent event) throws Exception {
         if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
+            podstawa.setNazwaZadanie(tabelaZ.getSelectionModel().getSelectedItem().NazwaProperty().get());
             podstawa.ZadanietoZadanie();
         }
     }
