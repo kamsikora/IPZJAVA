@@ -5,25 +5,31 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Okno_Zadanie {
+public class Okno_Zadanie implements Initializable {
 
     @FXML
     private TextField nazwa;
@@ -33,6 +39,12 @@ public class Okno_Zadanie {
     private TextField opis;
     @FXML
     private TextArea opisD;
+    @FXML
+    private ImageView imageOpis;
+    @FXML
+    private ImageView imageZadanie;
+    @FXML
+    private ImageView imageCzas;
     
     private Stage dialog;
     
@@ -65,7 +77,12 @@ public class Okno_Zadanie {
         this.controller = controller;
     }
     
-    public void initialize() {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         czas.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -80,6 +97,30 @@ public class Okno_Zadanie {
     private void ok(ActionEvent event) throws SQLException {
         if(nazwa.getText().trim().equals("") || czas.getText().trim().equals("") || opis.getText().trim().equals(""))
         {
+            if(opis.getText().trim().equals(""))
+            {
+                imageOpis.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageOpis.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(nazwa.getText().trim().equals(""))
+            {
+                imageZadanie.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageZadanie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(czas.getText().trim().equals(""))
+            {
+                imageCzas.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageCzas.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
             alert.setTitle("Puste pola");

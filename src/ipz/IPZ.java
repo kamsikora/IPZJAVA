@@ -54,7 +54,14 @@ public class IPZ extends Application {
     public void setNazwaZadanie(String NazwaZadanie) {
         this.NazwaZadanie=NazwaZadanie; 
     }
-    
+    private Projekt projekt;
+    public Projekt getProjekt() {
+        return projekt;
+    } 
+    public void setProjekt(Projekt projekt) {
+        this.projekt=projekt; 
+    }
+   
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -63,7 +70,7 @@ public class IPZ extends Application {
         Parent root = loader.getRoot();
         FXMLDocumentController controller = loader.getController();
         controller.setGlowny(this);
-        stage.getIcons().add(new Image("/ipz/DiT.png"));
+        stage.getIcons().add(new Image("/ipz/Grafika/DiT_1.png"));
         stage.setTitle("DiT Version: 0.3");
         
         Scene scene = new Scene(root, 792, 473);
@@ -140,6 +147,19 @@ public class IPZ extends Application {
         loader.load();
         Parent root = loader.getRoot();
         ZadanietoZadanie controller = loader.getController();
+        controller.setGlowny(this);
+        
+        stage.hide();
+        Scene scene = new Scene(root, stage.getWidth()-8, stage.getHeight()-27);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void ZadanietoZadanieS() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ZadanietoZadanieS.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        ZadanietoZadanieS controller = loader.getController();
         controller.setGlowny(this);
         
         stage.hide();

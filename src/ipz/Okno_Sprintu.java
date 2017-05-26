@@ -5,13 +5,16 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -19,10 +22,11 @@ import javafx.stage.Stage;
 
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Okno_Sprintu {
+public class Okno_Sprintu implements Initializable {
     
     @FXML
     private TextField nazwa;
@@ -106,6 +110,11 @@ public class Okno_Sprintu {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
-    public void initialize() {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     } 
 }

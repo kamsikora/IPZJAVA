@@ -5,23 +5,27 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Projekty_uzytkownicy {
+public class Projekty_uzytkownicy implements Initializable {
     
     private IPZ podstawa;
     @FXML
@@ -44,7 +48,12 @@ public class Projekty_uzytkownicy {
             info.setText("Zalogowany jako: "+rs.getString("imie")+" "+rs.getString("nazwisko")+"\nRola: "+rs.getString("nazwa"));
         }
     }
-    public void initialize()  {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }    
 
     @FXML

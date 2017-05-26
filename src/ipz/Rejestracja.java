@@ -7,6 +7,7 @@ package ipz;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,10 +16,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -29,10 +32,11 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Rejestracja {
+public class Rejestracja implements Initializable {
 
     @FXML
     private TextField imie;
@@ -151,8 +155,12 @@ public class Rejestracja {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
-    public void initialize() { 
-        rola.getSelectionModel().selectFirst();
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         rola.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
         @Override
         public ListCell<String> call(ListView<String> param) {

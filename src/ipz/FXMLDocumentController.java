@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
@@ -67,6 +68,9 @@ public class FXMLDocumentController implements Initializable {
             do {
                 if(str.equals(rs.getString(1)))
                 {
+                    con = DriverManager.getConnection(url, user, password);
+                    st = con.createStatement();
+                    st.executeUpdate("UPDATE `uzytkownik` SET `data_logowania` = CURRENT_TIMESTAMP WHERE `login`=\""+login.getText()+"\"");
                     podstawa.setLogin(login.getText());
                     podstawa.Projekty_uzytkownicy();
                 }

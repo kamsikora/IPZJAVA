@@ -5,16 +5,19 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -23,12 +26,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Okno_osob {
+public class Okno_osob implements Initializable {
     
     private final ObservableList<Osoba> personData = FXCollections.observableArrayList();
+    
     public ObservableList<Osoba> getOsobaData() {
         return personData;
     }
@@ -48,7 +53,7 @@ public class Okno_osob {
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),"")); 
+            personData.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),"", rs.getString("data_logowania"))); 
         }
     }
     
@@ -70,6 +75,8 @@ public class Okno_osob {
     private TableColumn<Osoba, String> email;
     @FXML
     private TableColumn<Osoba, String> ranga;
+    @FXML
+    private TableColumn<Osoba, String> log;
     
     @FXML
     private void cofnij(ActionEvent event) throws Exception {
@@ -84,11 +91,17 @@ public class Okno_osob {
             getOsobaData().add(tempOsoba);
         }
     }
-    public void initialize() {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         imie.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
         nazwisko.setCellValueFactory(cellData -> cellData.getValue().nazwiskoProperty());
         email.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         ranga.setCellValueFactory(cellData -> cellData.getValue().rangaProperty());
+        log.setCellValueFactory(cellData -> cellData.getValue().logowanieProperty());
     } 
 
     @FXML

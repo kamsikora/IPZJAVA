@@ -27,7 +27,7 @@ import javafx.scene.control.TextArea;
  *
  * @author Wiesław-J
  */
-public class ZadanietoZadanie implements Initializable {
+public class ZadanietoZadanieS implements Initializable {
 
     @FXML
     private Label nazwa;
@@ -89,7 +89,7 @@ public class ZadanietoZadanie implements Initializable {
 
     @FXML
     private void cofnij(ActionEvent event) throws Exception {
-        podstawa.Okno();
+        podstawa.Zadania_sprinty();
     }
 
     @FXML

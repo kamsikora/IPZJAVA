@@ -144,7 +144,7 @@ public class Zadania_sprinty implements Initializable {
     @FXML
     private void dodawanie(MouseEvent event) {
         usun.setDisable(true);
-        if(!tabelaW.getItems().isEmpty()) {
+        if(!tabelaW.getItems().isEmpty() && tabelaW.getSelectionModel().getSelectedItem()!=null) {
             dodaj.setDisable(false);
         }
         zadanie = tabelaW.getSelectionModel().getSelectedItem();
@@ -153,9 +153,25 @@ public class Zadania_sprinty implements Initializable {
     @FXML
     private void usuwanie(MouseEvent event) {
         dodaj.setDisable(true);
-        if(!tabelaS.getItems().isEmpty()) { 
+        if(!tabelaS.getItems().isEmpty() && tabelaS.getSelectionModel().getSelectedItem()!=null) { 
             usun.setDisable(false);
         }
         zadanie = tabelaS.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void oknozadaniaS(MouseEvent event) throws Exception {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown() && tabelaS.getSelectionModel().getSelectedItem()!=null) {
+            podstawa.setNazwaZadanie(tabelaS.getSelectionModel().getSelectedItem().NazwaProperty().get());
+            podstawa.ZadanietoZadanieS();
+        }
+    }
+
+    @FXML
+    private void oknozadaniaW(MouseEvent event) throws Exception {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown() && tabelaW.getSelectionModel().getSelectedItem()!=null) {
+            podstawa.setNazwaZadanie(tabelaW.getSelectionModel().getSelectedItem().NazwaProperty().get());
+            podstawa.ZadanietoZadanieS();
+        }
     }
 }

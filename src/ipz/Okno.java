@@ -5,11 +5,13 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
@@ -18,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -30,10 +33,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Okno {
+public class Okno implements Initializable {
     
     private final ObservableList<Projekt> projektData = FXCollections.observableArrayList();
     public ObservableList<Projekt> getProjektData() {
@@ -127,14 +131,22 @@ public class Okno {
         while(rs.next()) { 
             info.setText("Zalogowany jako: "+rs.getString("imie")+" "+rs.getString("nazwisko")+"\nRola: "+rs.getString("nazwa"));
         }
+        if(podstawa.getProjekt()!=null)
+        {
+            lista.getSelectionModel().select(podstawa.getProjekt());
+        }
     }
-    
+
     @FXML
     private void pokaz(ActionEvent event) throws Exception  {
         podstawa.Okno_osob_projekt();
     }
-    public void initialize() {
-        lista.getSelectionModel().selectFirst();
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL urlx, ResourceBundle rb) {
+        // TODO
         lista.setCellFactory(new Callback<ListView<Projekt>, ListCell<Projekt>>() {
         @Override
         public ListCell<Projekt> call(ListView<Projekt> param) {
@@ -172,6 +184,7 @@ public class Okno {
         lista.valueProperty().addListener(new ChangeListener<Projekt>() {
         @Override
         public void changed(ObservableValue ov, Projekt oldValue, Projekt newValue)  {
+            podstawa.setProjekt(newValue);
             sprintData.removeAll(sprintData);
             zadanieData.removeAll(zadanieData);
             zadanieDwData.removeAll(zadanieDwData);
@@ -264,7 +277,7 @@ public class Okno {
 
     @FXML
     private void zadaniatosprint(MouseEvent event) throws Exception {
-        if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown() && tabelaS.getSelectionModel().getSelectedItem()!=null) {
             podstawa.setNazwaSprint(tabelaS.getSelectionModel().getSelectedItem().NazwaProperty().get());
             podstawa.Zadania_sprinty();
         }
@@ -272,7 +285,7 @@ public class Okno {
     
     @FXML
     private void zadanietozadanie(MouseEvent event) throws Exception {
-        if (event.getClickCount() == 2 && event.isPrimaryButtonDown()) {
+        if (event.getClickCount() == 2 && event.isPrimaryButtonDown() && tabelaZ.getSelectionModel().getSelectedItem()!=null) {       
             podstawa.setNazwaZadanie(tabelaZ.getSelectionModel().getSelectedItem().NazwaProperty().get());
             podstawa.ZadanietoZadanie();
         }

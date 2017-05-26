@@ -5,6 +5,7 @@
  */
 package ipz;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,10 +14,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,10 +29,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Okno_osob_projekt {
+public class Okno_osob_projekt implements Initializable {
 
     @FXML
     private TableView<Osoba> tabelaP;
@@ -86,11 +90,11 @@ public class Okno_osob_projekt {
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM  `uzytkownik_to_projekt` INNER JOIN  `uzytkownik` ON  `uzytkownik_to_projekt`.`id_uzytkownik` =  `uzytkownik`.`id` INNER JOIN  `stanowisko` ON  `uzytkownik_to_projekt`.`id_stanowisko` =  `stanowisko`.`id` INNER JOIN  `projekt` ON  `uzytkownik_to_projekt`.`id_projekt` =  `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getNazwaProjekt()+"\"");
         while(rs.next()) { 
-            osobaDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"))); 
+            osobaDataP.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"), rs.getString("stanowisko.nazwa"),"")); 
         }
         rs = st.executeQuery("SELECT * FROM  `uzytkownik` INNER JOIN  `rola` ON  `uzytkownik`.`id_rola` =  `rola`.`id`");
         while(rs.next()) { 
-            osobaDataW.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),""));
+            osobaDataW.add(new Osoba(rs.getString("imie"), rs.getString("nazwisko"), rs.getString("email"), rs.getString("nazwa"), rs.getString("login"), rs.getString("haslo"),"",""));
         }  
         osobaDataW2.addAll(osobaDataW);
         for(Osoba tabP : osobaDataP) {
@@ -105,7 +109,12 @@ public class Okno_osob_projekt {
         tabelaP.setItems(getOsobaDataP());
     }    
     
-    public void initialize() {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         imieW.setCellValueFactory(cellData -> cellData.getValue().imieProperty());
         nazwiskoW.setCellValueFactory(cellData -> cellData.getValue().nazwiskoProperty());
         emailW.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -118,7 +127,7 @@ public class Okno_osob_projekt {
     @FXML
     private void usuwanie(MouseEvent event) {
         dodaj.setDisable(true);
-        if(!tabelaP.getItems().isEmpty()) {
+        if(!tabelaP.getItems().isEmpty() && tabelaP.getSelectionModel().getSelectedItem()!=null) {
             usun.setDisable(false);
         }
         osoba = tabelaP.getSelectionModel().getSelectedItem();
@@ -127,7 +136,7 @@ public class Okno_osob_projekt {
     @FXML
     private void dodawanie(MouseEvent event) {
         usun.setDisable(true);
-        if(!tabelaW.getItems().isEmpty()) {
+        if(!tabelaW.getItems().isEmpty() && tabelaW.getSelectionModel().getSelectedItem()!=null) {
             dodaj.setDisable(false);
         }
         osoba = tabelaW.getSelectionModel().getSelectedItem();

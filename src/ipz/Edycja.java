@@ -6,6 +6,7 @@
 package ipz;
 
 import java.math.BigInteger;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,10 +15,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -28,10 +31,11 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Edycja {
+public class Edycja implements Initializable {
 
     @FXML
     private TextField imie;
@@ -77,7 +81,12 @@ public class Edycja {
         }
     }
     
-    public void initialize() {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         rola.getSelectionModel().selectFirst();
         rola.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
         @Override
