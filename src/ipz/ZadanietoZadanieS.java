@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 
 /**
  * FXML Controller class
@@ -41,6 +42,12 @@ public class ZadanietoZadanieS implements Initializable {
     private Label sprint;
     @FXML
     private Label stan;
+    @FXML
+    private TextArea komentarz;
+    @FXML
+    private ListView<String> komentarze;
+    @FXML
+    private ToggleButton zmianaStanu;
 
     private Connection con = null;
     private Statement st = null;
@@ -49,10 +56,6 @@ public class ZadanietoZadanieS implements Initializable {
     private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
-    @FXML
-    private TextArea komentarz;
-    @FXML
-    private ListView<String> komentarze;
     
     private final ObservableList<String> komentarzData = FXCollections.observableArrayList();
     public ObservableList<String> getKomentarzData() {
@@ -85,6 +88,14 @@ public class ZadanietoZadanieS implements Initializable {
         while(rs.next()) { 
             komentarzData.add(rs.getString("imie")+" "+rs.getString("nazwisko")+"  |  "+rs.getString("data_czas")+"  |  "+rs.getString("tresc"));
         }
+        if(stan.getText().equals("Do wykonania") || stan.getText().equals("Zakończone")) {
+            zmianaStanu.setText("Rozpocznij");
+        }
+        else
+        {
+            zmianaStanu.setSelected(true);
+            zmianaStanu.setText("Zakończ");
+        }
     }
 
     @FXML
@@ -114,5 +125,22 @@ public class ZadanietoZadanieS implements Initializable {
                 getKomentarzData().add(rs.getString("imie")+" "+rs.getString("nazwisko")+"  |  "+rs.getString("data_czas")+"  |  "+rs.getString("tresc"));
             } 
         }
+    }
+    
+    @FXML
+    private void zmiana(ActionEvent event) throws SQLException {
+        con = DriverManager.getConnection(url, user, password);
+        st = con.createStatement();
+        if(zmianaStanu.isSelected())
+        {
+            zmianaStanu.setText("Zakończ");
+            stan.setText("W trakcie"); 
+        }
+        else
+        {
+            zmianaStanu.setText("Rozpocznij");
+            stan.setText("Zakończone");
+        } 
+        st.executeUpdate("UPDATE `zadanie` SET `id_stan` = (SELECT `id` FROM `stan` WHERE `nazwa` = \""+stan.getText()+"\") WHERE `id` = (SELECT * FROM(SELECT `id_zadanie` FROM `zadanie_to_projekt` INNER JOIN `zadanie` ON `zadanie_to_projekt`.`id_zadanie` = `zadanie`.`id` AND  `nazwa` = \""+podstawa.getNazwaZadanie()+"\" INNER JOIN `projekt` ON `zadanie_to_projekt`.`id_projekt` = `projekt`.`id` WHERE `projekt`.`nazwa` =\""+podstawa.getNazwaProjekt()+"\")tmp)");
     }
 }
