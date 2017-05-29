@@ -27,6 +27,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -61,6 +63,14 @@ public class Edycja implements Initializable {
     private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
     private final String user = "ipzuser";
     private final String password = "ipzpassword";
+    @FXML
+    private ImageView imageImie;
+    @FXML
+    private ImageView imageNazwisko;
+    @FXML
+    private ImageView imageLogin;
+    @FXML
+    private ImageView imageEmail;
      
     public void setOsoba(Osoba osoba) throws NoSuchAlgorithmException {
         this.osoba = osoba;
@@ -133,6 +143,38 @@ public class Edycja implements Initializable {
     private void ok(ActionEvent event) throws SQLException, NoSuchAlgorithmException {
         if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || rola.getValue() == null)
         {
+            if(imie.getText().trim().equals(""))
+            {
+                imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(nazwisko.getText().trim().equals(""))
+            {
+                imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(login.getText().trim().equals(""))
+            {
+                imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(email.getText().trim().equals(""))
+            {
+                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
             alert.setTitle("Puste pola");
@@ -144,6 +186,7 @@ public class Edycja implements Initializable {
         {
             if(email.getText().contains("@") && email.getText().contains("."))
             {
+                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
                 if(!login.getText().equals(osoba.getLogin()))
                 {
                     con = DriverManager.getConnection(url, user, password);
@@ -221,6 +264,31 @@ public class Edycja implements Initializable {
             }
             else
             {
+                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
+                if(imie.getText().trim().equals(""))
+                {
+                    imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
+                if(nazwisko.getText().trim().equals(""))
+                {
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
+                if(login.getText().trim().equals(""))
+                {
+                    imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(dialog);
                 alert.setTitle("Błąd w adresie email");

@@ -42,7 +42,7 @@ public class Okno_Zadanie implements Initializable {
     @FXML
     private ImageView imageOpis;
     @FXML
-    private ImageView imageZadanie;
+    private ImageView imageNazwa;
     @FXML
     private ImageView imageCzas;
     
@@ -107,11 +107,11 @@ public class Okno_Zadanie implements Initializable {
             }
             if(nazwa.getText().trim().equals(""))
             {
-                imageZadanie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageZadanie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(czas.getText().trim().equals(""))
             {

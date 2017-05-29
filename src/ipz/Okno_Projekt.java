@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +35,10 @@ public class Okno_Projekt implements Initializable {
     private DatePicker start;
     @FXML
     private DatePicker koniec;
+    @FXML
+    private ImageView imageNazwa;
+    @FXML
+    private ImageView imageStart;
     
     private Stage dialog;
     
@@ -63,6 +69,22 @@ public class Okno_Projekt implements Initializable {
     private void ok(ActionEvent event) throws SQLException {
         if(nazwa.getText().trim().equals("") || start.getValue()==null)
         {
+            if(start.getValue()==null)
+            {
+                imageStart.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageStart.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
+            if(nazwa.getText().trim().equals(""))
+            {
+                imageNazwa.setImage(new Image("/ipz/Grafika/Icon.png"));
+            }
+            else
+            {
+                imageNazwa.setImage(new Image("/ipz/Grafika/DiT1.png"));
+            }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
             alert.setTitle("Puste pola");
