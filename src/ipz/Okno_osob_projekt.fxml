@@ -12,7 +12,7 @@
    <children>
       <VBox AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Label text="Użytkownicy w projekcie" />
+            <Label text="Użytkownicy w projekcie" textFill="WHITE" />
             <TableView fx:id="tabelaP" onMouseClicked="#usuwanie" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -24,7 +24,7 @@
                   <TableColumn fx:id="stanowiskoP" text="Stanowisko" />
                </columns>
             </TableView>
-            <Label text="Użytkownicy poza projektem" />
+            <Label text="Użytkownicy poza projektem" textFill="WHITE" />
             <TableView fx:id="tabelaW" onMouseClicked="#dodawanie" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
