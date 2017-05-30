@@ -9,7 +9,7 @@
 <AnchorPane id="tlo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Okno">
    <children>
       <Button mnemonicParsing="false" onAction="#cofnij" text="Cofnij" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-      <Label fx:id="info" style="-fx-background-color: #00FF00;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <Label fx:id="info" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
@@ -62,7 +62,7 @@
          </children>
       </VBox>
       <ComboBox fx:id="lista" prefWidth="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <Label fx:id="projekt" style="-fx-background-color: #00FF00;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="projekt" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
       <HBox layoutX="283.0" layoutY="87.0" prefHeight="408.0" prefWidth="635.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="87.0">
          <children>
             <TableView fx:id="tabelaS" onMousePressed="#zadaniatosprint" tableMenuButtonVisible="true" HBox.hgrow="ALWAYS">

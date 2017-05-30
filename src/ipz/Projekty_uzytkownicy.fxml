@@ -10,7 +10,7 @@
 
 <AnchorPane id="tlo" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #87CEFA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Projekty_uzytkownicy">
    <children>
-      <Label fx:id="info" style="-fx-background-color: #00FF00;" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <Label fx:id="info" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

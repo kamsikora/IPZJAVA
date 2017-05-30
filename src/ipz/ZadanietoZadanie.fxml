@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.ZadanietoZadanie">
+<AnchorPane id="tlo" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.ZadanietoZadanie">
    <children>
       <GridPane AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
@@ -22,18 +22,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" />
         </rowConstraints>
          <children>
-            <Label text="Nazwa zadania" />
-            <Label text="Czas(h)" GridPane.rowIndex="1" />
-            <Label text="Opis" GridPane.rowIndex="2" />
-            <Label text="Opis długi" GridPane.rowIndex="3" />
-            <Label text="Sprint" GridPane.rowIndex="4" />
-            <Label text="Stan" GridPane.rowIndex="5" />
-            <Label fx:id="nazwa" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="czas" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="opis" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="opisD" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="sprint" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="stan" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Nazwa zadania" textFill="WHITE" />
+            <Label text="Czas(h)" textFill="WHITE" GridPane.rowIndex="1" />
+            <Label text="Opis" textFill="WHITE" GridPane.rowIndex="2" />
+            <Label text="Opis długi" textFill="WHITE" GridPane.rowIndex="3" />
+            <Label text="Sprint" textFill="WHITE" GridPane.rowIndex="4" />
+            <Label text="Stan" textFill="WHITE" GridPane.rowIndex="5" />
+            <Label fx:id="nazwa" text="Label" textFill="WHITE" GridPane.columnIndex="1" />
+            <Label fx:id="czas" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="opis" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="opisD" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="sprint" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="stan" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="250.0">
