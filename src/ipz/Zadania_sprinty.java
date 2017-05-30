@@ -68,7 +68,10 @@ public class Zadania_sprinty implements Initializable {
     public ObservableList<Zadanie> getZadanieDataW2() {
         return zadanieDataW2;
     }
-    
+    private final ObservableList<Zadanie> zadanieData = FXCollections.observableArrayList();
+    public ObservableList<Zadanie> getZadanieData() {
+        return zadanieData;
+    }
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;
@@ -181,7 +184,7 @@ public class Zadania_sprinty implements Initializable {
         Zadanie tempZadanie = new Zadanie();
         boolean okClicked = podstawa.showDialogZadanie(tempZadanie);
         if (okClicked) {
-            getZadanieDataW2().add(tempZadanie);
+            getZadanieData().add(tempZadanie);
         }
     }
 }
