@@ -145,35 +145,35 @@ public class Edycja implements Initializable {
         {
             if(imie.getText().trim().equals(""))
             {
-                imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageImie.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageImie.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(nazwisko.getText().trim().equals(""))
             {
-                imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageNazwisko.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageNazwisko.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(login.getText().trim().equals(""))
             {
-                imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageLogin.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageLogin.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(email.getText().trim().equals(""))
             {
-                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/git.png"));
             }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);

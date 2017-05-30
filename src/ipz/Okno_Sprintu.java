@@ -80,27 +80,27 @@ public class Okno_Sprintu implements Initializable {
         {
             if(nazwa.getText().trim().equals(""))
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(start.getValue()==null)
             {
-                imageStart.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageStart.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageStart.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageStart.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(koniec.getValue()==null)
             {
-                imageKoniec.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageKoniec.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageKoniec.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageKoniec.setImage(new Image("/ipz/Grafika/git.png"));
             }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
