@@ -186,7 +186,7 @@ public class Edycja implements Initializable {
         {
             if(email.getText().contains("@") && email.getText().contains("."))
             {
-                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/git.png"));
                 if(!login.getText().equals(osoba.getLogin()))
                 {
                     con = DriverManager.getConnection(url, user, password);
@@ -264,30 +264,30 @@ public class Edycja implements Initializable {
             }
             else
             {
-                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/niegit.png"));
                 if(imie.getText().trim().equals(""))
                 {
-                    imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    imageImie.setImage(new Image("/ipz/Grafika/niegit.png"));
                 }
                 else
                 {
-                    imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    imageImie.setImage(new Image("/ipz/Grafika/git.png"));
                 }
                 if(nazwisko.getText().trim().equals(""))
                 {
-                    imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/niegit.png"));
                 }
                 else
                 {
-                    imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/git.png"));
                 }
                 if(login.getText().trim().equals(""))
                 {
-                    imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    imageLogin.setImage(new Image("/ipz/Grafika/niegit.png"));
                 }
                 else
                 {
-                    imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    imageLogin.setImage(new Image("/ipz/Grafika/git.png"));
                 }
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(dialog);
