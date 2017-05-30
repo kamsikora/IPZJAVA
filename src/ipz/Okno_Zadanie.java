@@ -99,27 +99,27 @@ public class Okno_Zadanie implements Initializable {
         {
             if(opis.getText().trim().equals(""))
             {
-                imageOpis.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageOpis.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageOpis.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageOpis.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(nazwa.getText().trim().equals(""))
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/git.png"));
             }
             if(czas.getText().trim().equals(""))
             {
-                imageCzas.setImage(new Image("/ipz/Grafika/Icon.png"));
+                imageCzas.setImage(new Image("/ipz/Grafika/niegit.png"));
             }
             else
             {
-                imageCzas.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                imageCzas.setImage(new Image("/ipz/Grafika/git.png"));
             }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);

@@ -40,17 +40,17 @@
             </TextField>
             <Label text="Opis długi" textFill="WHITE" GridPane.rowIndex="3" />
             <TextArea fx:id="opisD" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ImageView fx:id="imageOpis" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fx:id="imageOpis" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <viewport>
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <ImageView fx:id="imageNazwa" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="imageNazwa" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <viewport>
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <ImageView fx:id="imageCzas" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <ImageView fx:id="imageCzas" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <viewport>
                   <Rectangle2D />
                </viewport>
