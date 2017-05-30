@@ -71,19 +71,19 @@ public class Okno_Projekt implements Initializable {
         {
             if(start.getValue()==null)
             {
-                imageStart.setImage(new Image("/ipz/Grafika/niegit.png"));
+                imageStart.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageStart.setImage(new Image("/ipz/Grafika//git.png"));
+                imageStart.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(nazwa.getText().trim().equals(""))
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageNazwa.setImage(new Image("/ipz/Grafika/git.png"));
+                imageNazwa.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);

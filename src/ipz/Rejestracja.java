@@ -104,51 +104,51 @@ public class Rejestracja implements Initializable {
         {
             if(imie.getText().trim().equals(""))
             {
-                imageImie.setImage(new Image("/ipz/Grafika/niegit.png"));
+                imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageImie.setImage(new Image("/ipz/Grafika/git.png"));
+                imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(nazwisko.getText().trim().equals(""))
             {
-                imageNazwisko.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageNazwisko.setImage(new Image("/ipz/Grafika/git.png"));
+                imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(login.getText().trim().equals(""))
             {
-                imageLogin.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageLogin.setImage(new Image("/ipz/Grafika/git.png"));
+                imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(email.getText().trim().equals(""))
             {
-                imageEmail.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageEmail.setImage(new Image("/ipz/Grafika/git.png"));
+                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(haslo.getText().trim().equals(""))
             {
-                imageHaslo.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageHaslo.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageHaslo.setImage(new Image("/ipz/Grafika/git.png"));
+                imageHaslo.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             if(haslo2.getText().trim().equals(""))
             {
-                imageHaslo2.setImage(new Image("/ipz/Grafika//niegit.png"));
+                imageHaslo2.setImage(new Image("/ipz/Grafika/Icon.png"));
             }
             else
             {
-                imageHaslo2.setImage(new Image("/ipz/Grafika/git.png"));
+                imageHaslo2.setImage(new Image("/ipz/Grafika/DiT1.png"));
             }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
