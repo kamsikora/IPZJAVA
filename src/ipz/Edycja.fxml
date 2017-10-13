@@ -1,67 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="tlo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Rejestracja">
+<AnchorPane id="tlo" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipz.Edycja">
    <children>
       <GridPane AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-        </rowConstraints>
          <children>
             <TextField fx:id="imie" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1">
                <tooltip>
                   <Tooltip text="Podaj swoje Imię" />
-               </tooltip></TextField>
+               </tooltip>
+            </TextField>
             <TextField fx:id="nazwisko" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <tooltip>
                   <Tooltip text="Podaj swoje Nazwisko" />
-               </tooltip></TextField>
+               </tooltip>
+            </TextField>
             <TextField fx:id="login" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <tooltip>
                   <Tooltip text="Login którym będziesz się poslugiwać" />
-               </tooltip></TextField>
+               </tooltip>
+            </TextField>
             <TextField fx:id="email" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <tooltip>
                   <Tooltip text="E-mail kontaktowy" />
-               </tooltip></TextField>
+               </tooltip>
+            </TextField>
             <PasswordField fx:id="haslo" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <tooltip>
                   <Tooltip text="Twoje hasło (minimum 6 znaków)" />
-               </tooltip></PasswordField>
-            <PasswordField fx:id="haslo2" onAction="#ok" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <tooltip>
-                  <Tooltip text="Powtórz swoje hasło" />
-               </tooltip></PasswordField>
+               </tooltip>
+            </PasswordField>
             <Label text="Imię" textFill="WHITE" />
             <Label text="Nazwisko" textFill="WHITE" GridPane.rowIndex="1" />
             <Label text="Login" textFill="WHITE" GridPane.rowIndex="2" />
             <Label text="E-mail" textFill="WHITE" GridPane.rowIndex="3" />
             <Label text="Hasło" textFill="WHITE" GridPane.rowIndex="4" />
-            <Label text="Weryfikacja hasłą" textFill="WHITE" GridPane.rowIndex="5" />
-            <Label text="Rola" textFill="WHITE" GridPane.rowIndex="6" />
-            <ComboBox fx:id="rola" prefWidth="150.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Rola" textFill="WHITE" GridPane.rowIndex="5" />
+            <ComboBox fx:id="rola" prefWidth="150.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ImageView fx:id="imageImie" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
             <ImageView fx:id="imageNazwisko" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ImageView fx:id="imageLogin" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <ImageView fx:id="imageEmail" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <ImageView fx:id="imageHaslo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <ImageView fx:id="imageHaslo2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
          </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
       </GridPane>
       <HBox AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>

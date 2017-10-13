@@ -17,18 +17,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
-public class Rejestracja {
+public class Rejestracja implements Initializable {
 
     @FXML
     private TextField imie;
@@ -42,27 +52,104 @@ public class Rejestracja {
     private PasswordField haslo;
     @FXML
     private PasswordField haslo2;
-    
+    @FXML
+    private ComboBox<String> rola;
+    @FXML
+    private ImageView imageImie;
+    @FXML
+    private ImageView imageNazwisko;
+    @FXML
+    private ImageView imageLogin;
+    @FXML
+    private ImageView imageEmail;
+    @FXML
+    private ImageView imageHaslo;
+    @FXML
+    private ImageView imageHaslo2;
+
     private Stage dialog;
+    
+    private boolean okClicked = false;
+
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    
+    private Osoba osoba;
+    public void setOsoba(Osoba osoba) {
+        this.osoba=osoba;
+    }
     
     private Connection con = null;
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352?characterEncoding=UTF-8";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
     
-    public void setDialog(Stage dialog) {
+    public void setDialog(Stage dialog) throws SQLException {
         this.dialog = dialog;
+        con = DriverManager.getConnection(url, user, password);
+        st = con.createStatement();
+        rs = st.executeQuery("SELECT * FROM  `rola`");
+        while(rs.next()) { 
+           rola.getItems().addAll(rs.getString("nazwa"));
+        }
     }
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO  
-    }   
+    
     @FXML
     private void ok(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException {
-        if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals(""))
+        if(imie.getText().trim().equals("") || nazwisko.getText().trim().equals("") || login.getText().trim().equals("") || email.getText().trim().equals("") || haslo.getText().trim().equals("") || haslo2.getText().trim().equals("") || rola.getValue() == null)
         {
+            if(imie.getText().trim().equals(""))
+            {
+                imageImie.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageImie.setImage(new Image("/ipz/Grafika/git.png"));
+            }
+            if(nazwisko.getText().trim().equals(""))
+            {
+                imageNazwisko.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageNazwisko.setImage(new Image("/ipz/Grafika/git.png"));
+            }
+            if(login.getText().trim().equals(""))
+            {
+                imageLogin.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageLogin.setImage(new Image("/ipz/Grafika/git.png"));
+            }
+            if(email.getText().trim().equals(""))
+            {
+                imageEmail.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageEmail.setImage(new Image("/ipz/Grafika/git.png"));
+            }
+            if(haslo.getText().trim().equals(""))
+            {
+                imageHaslo.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageHaslo.setImage(new Image("/ipz/Grafika/git.png"));
+            }
+            if(haslo2.getText().trim().equals(""))
+            {
+                imageHaslo2.setImage(new Image("/ipz/Grafika/niegit.png"));
+            }
+            else
+            {
+                imageHaslo2.setImage(new Image("/ipz/Grafika/git.png"));
+            }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(dialog);
             alert.setTitle("Puste pola");
@@ -74,7 +161,10 @@ public class Rejestracja {
         {
             if(email.getText().contains("@") && email.getText().contains("."))
             {
+                imageEmail.setImage(new Image("/ipz/Grafika/DiT1.png"));
                 if(haslo.getText().equals(haslo2.getText())) {
+                    imageHaslo.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    imageHaslo2.setImage(new Image("/ipz/Grafika/DiT1.png"));
                     con = DriverManager.getConnection(url, user, password);
                     st = con.createStatement();
                     rs = st.executeQuery("SELECT * FROM `uzytkownik` WHERE `login` = \""+login.getText()+"\"");
@@ -93,12 +183,44 @@ public class Rejestracja {
                         String str = String.format("%032x", new BigInteger(1, md5.digest()));
                         con = DriverManager.getConnection(url, user, password);
                         st = con.createStatement();
-                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\")");
+                        st.executeUpdate("INSERT INTO `uzytkownik`(`imie`, `nazwisko`, `login`, `email`, `haslo`, `id_rola`) VALUES (\""+imie.getText()+"\",\""+nazwisko.getText()+"\",\""+login.getText()+"\",\""+email.getText()+"\",\""+str+"\",(SELECT `id` FROM  `rola` WHERE `nazwa` = \""+rola.getValue()+"\"))");
+                        osoba.setImie(imie.getText());
+                        osoba.setNazwisko(nazwisko.getText());
+                        osoba.setLogin(login.getText());
+                        osoba.setEmail(email.getText());
+                        osoba.setRanga(rola.getValue());
+                        okClicked = true;
                         dialog.close();
                     }
                 }
                 else
-                {
+                {   
+                    if(imie.getText().trim().equals(""))
+                    {
+                        imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    }
+                    else
+                    {
+                        imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    }
+                    if(nazwisko.getText().trim().equals(""))
+                    {
+                        imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    }
+                    else
+                    {
+                        imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    }
+                    if(login.getText().trim().equals(""))
+                    {
+                        imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    }
+                    else
+                    {
+                        imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                    }
+                    imageHaslo.setImage(new Image("/ipz/Grafika/Icon.png"));
+                    imageHaslo2.setImage(new Image("/ipz/Grafika/Icon.png"));
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.initOwner(dialog);
                     alert.setTitle("Błąd hasła");
@@ -109,6 +231,31 @@ public class Rejestracja {
             }
             else
             {
+                imageEmail.setImage(new Image("/ipz/Grafika/Icon.png"));
+                if(imie.getText().trim().equals(""))
+                {
+                    imageImie.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageImie.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
+                if(nazwisko.getText().trim().equals(""))
+                {
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageNazwisko.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
+                if(login.getText().trim().equals(""))
+                {
+                    imageLogin.setImage(new Image("/ipz/Grafika/Icon.png"));
+                }
+                else
+                {
+                    imageLogin.setImage(new Image("/ipz/Grafika/DiT1.png"));
+                }
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(dialog);
                 alert.setTitle("Błąd w adresie email");
@@ -124,4 +271,50 @@ public class Rejestracja {
     private void anuluj(ActionEvent event) {
         dialog.close();
     }
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        rola.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+        @Override
+        public ListCell<String> call(ListView<String> param) {
+  
+            return new ListCell<String>(){
+              @Override
+                public void updateItem(String item, boolean empty){
+                    super.updateItem(item, empty);
+                    if(!empty) {
+                        setText(item);
+                        setGraphic(null);
+                    } 
+                    else 
+                    {
+                        setText(null);
+                    }
+                }
+           };
+        }
+        });
+        rola.setButtonCell(
+        new ListCell<String>() {
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty); 
+            if(!empty) {
+                setText(item);
+            } 
+            else 
+            {
+                setText(null);
+            }
+        }
+        });
+        rola.valueProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue ov, String oldValue, String newValue)  {
+        }
+        });
+    } 
 }

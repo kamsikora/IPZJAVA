@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 
 
 /**
+ * FXML Controller class
  *
  * @author Kamil
  */
@@ -39,40 +40,53 @@ public class FXMLDocumentController implements Initializable {
     private Statement st = null;
     private ResultSet rs = null;
 
-    private final String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11162352";
-    private final String user = "sql11162352";
-    private final String password = "wUanP9eU6G";
+    private final String url = "jdbc:mysql://mysql8.db4free.net:3307/ipzdb?characterEncoding=UTF-8&useSSL=false";
+    private final String user = "ipzuser";
+    private final String password = "ipzpassword";
     
     private IPZ podstawa;
-    public void Setglowny(IPZ podstawa) {
+    public void setGlowny(IPZ podstawa) {
         this.podstawa=podstawa;
+        
     }
     @FXML
     private void logowanie(ActionEvent event) throws SQLException, Exception {
         con = DriverManager.getConnection(url, user, password);
         st = con.createStatement();
-        rs = st.executeQuery("SELECT `haslo` FROM `uzytkownik` WHERE `login` LIKE \""+login.getText()+"\"");
+        rs = st.executeQuery("SELECT `haslo` FROM `uzytkownik` WHERE `login` = \""+login.getText()+"\"");
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         md5.update(StandardCharsets.UTF_8.encode(haslo.getText()));
         String str = String.format("%032x", new BigInteger(1, md5.digest()));
-        while(rs.next()) { 
-            if(str.equals(rs.getString(1)))
-            {
-                podstawa.Okno();
-            } 
-            else
-            {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.initOwner(podstawa.getstage());
-                alert.setTitle("Błąd logowania");
-                alert.setHeaderText("Złe hasło lub login");
-                alert.setContentText("Proszę podać ponownie hasło");
-                alert.showAndWait();
-            }
+        if(!rs.next()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(podstawa.getStage());
+            alert.setTitle("Błąd logowania");
+            alert.setHeaderText("Zły login");
+            alert.setContentText("Proszę podać ponownie login");
+            alert.showAndWait();
+        } else { 
+            do {
+                if(str.equals(rs.getString(1)))
+                {
+                    con = DriverManager.getConnection(url, user, password);
+                    st = con.createStatement();
+                    st.executeUpdate("UPDATE `uzytkownik` SET `data_logowania` = CURRENT_TIMESTAMP WHERE `login`=\""+login.getText()+"\"");
+                    podstawa.setLogin(login.getText());
+                    podstawa.Projekty_uzytkownicy();
+                }
+                else
+                {
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.initOwner(podstawa.getStage());
+                    alert.setTitle("Błąd logowania");
+                    alert.setHeaderText("Złe hasło");
+                    alert.setContentText("Proszę podać ponownie hasło");
+                    alert.showAndWait();
+                }    
+            } while (rs.next());
         }
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO    
     }    
 }
